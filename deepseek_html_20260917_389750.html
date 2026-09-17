@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a1a10">
+<title>रुकुम पश्चिम · RUKUM WEST</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100%;overflow-x:hidden;background:#0a0f14;color:#e8e8ff;
+font-family:'Kalimati','Mangal','Noto Sans Devanagari',Georgia,serif;
+-webkit-font-smoothing:antialiased;line-height:1.5}
+
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+background:
+ radial-gradient(ellipse at 20% 15%,rgba(60,140,90,.25),transparent 55%),
+ radial-gradient(ellipse at 80% 30%,rgba(200,160,80,.12),transparent 55%),
+ radial-gradient(ellipse at 50% 85%,rgba(60,100,140,.15),transparent 60%),
+ #0a0f14}
+#stars{position:fixed;inset:0;z-index:1;pointer-events:none;
+background-image:
+ radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.4),transparent),
+ radial-gradient(1px 1px at 45% 65%,rgba(220,220,255,.35),transparent),
+ radial-gradient(1px 1px at 70% 20%,rgba(255,255,255,.3),transparent),
+ radial-gradient(1px 1px at 88% 55%,rgba(200,220,255,.3),transparent),
+ radial-gradient(1px 1px at 30% 85%,rgba(255,255,255,.35),transparent);
+background-size:200% 200%;animation:twk 10s ease-in-out infinite alternate}
+@keyframes twk{0%{opacity:.4}100%{opacity:.9}}
+
+#app{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;
+align-items:center;padding:20px 16px 40px}
+#titleWrap{text-align:center;margin-top:8vh;margin-bottom:6vh;
+animation:fadeUp 1.2s cubic-bezier(.22,1,.36,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+#title{font-size:44px;font-weight:600;letter-spacing:6px;
+background:linear-gradient(180deg,#fff,#c8e8a8 40%,#6ab87a);
+-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+filter:drop-shadow(0 0 25px rgba(120,200,140,.5))}
+#subtitle{margin-top:12px;font-size:11px;letter-spacing:8px;color:#7a9a80}
+#subDivider{margin:16px auto 0;width:60px;height:1px;
+background:linear-gradient(90deg,transparent,#6ab87a,transparent)}
+#subCn{margin-top:14px;font-size:14px;letter-spacing:4px;color:#a8d8b8;opacity:.9}
+
+#btnWrap{display:flex;flex-direction:column;gap:14px;width:100%;max-width:400px;
+animation:fadeUp 1.2s .2s both}
+.bigBtn{padding:22px 22px;border-radius:16px;border:1px solid rgba(120,200,140,.4);
+background:linear-gradient(180deg,rgba(20,50,30,.6),rgba(10,25,15,.9));
+color:#e8e8ff;font-family:inherit;font-size:18px;letter-spacing:4px;cursor:pointer;
+text-align:center;backdrop-filter:blur(12px);
+transition:.35s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;
+box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.bigBtn::before{content:'';position:absolute;inset:0;border-radius:16px;
+background:radial-gradient(circle at 50% 0%,rgba(120,200,140,.35),transparent 70%);
+opacity:0;transition:.35s}
+.bigBtn:active{transform:scale(.97);box-shadow:0 0 40px rgba(120,200,140,.6)}
+.bigBtn:active::before{opacity:1}
+.bigBtn .cn{display:block;font-size:18px;letter-spacing:4px;font-weight:600}
+.bigBtn .en{display:block;font-size:10px;letter-spacing:5px;color:#7a9a80;margin-top:8px}
+.bigBtn.alt{border-color:rgba(200,160,80,.4);
+background:linear-gradient(180deg,rgba(60,45,15,.55),rgba(25,18,5,.9))}
+.bigBtn.alt::before{background:radial-gradient(circle at 50% 0%,rgba(200,160,80,.35),transparent 70%)}
+.bigBtn.alt .en{color:#b89860}
+.bigBtn.blue{border-color:rgba(100,170,220,.4);
+background:linear-gradient(180deg,rgba(20,40,60,.55),rgba(10,20,30,.9))}
+.bigBtn.blue::before{background:radial-gradient(circle at 50% 0%,rgba(100,170,220,.35),transparent 70%)}
+.bigBtn.blue .en{color:#7a9abc}
+.bigBtn.map{border-color:rgba(120,140,220,.5);
+background:linear-gradient(180deg,rgba(30,30,70,.6),rgba(15,15,35,.9))}
+.bigBtn.map::before{background:radial-gradient(circle at 50% 0%,rgba(140,160,240,.4),transparent 70%)}
+.bigBtn.map .en{color:#8a9acc}
+
+#topBar{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 16px;
+display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+#backBtn{pointer-events:auto;padding:10px 18px;border-radius:24px;
+border:1px solid rgba(120,200,140,.4);background:rgba(10,25,15,.85);
+color:#e8e8ff;font-family:inherit;font-size:12px;letter-spacing:2px;cursor:pointer;
+backdrop-filter:blur(10px);display:none;transition:.3s}
+#backBtn:active{transform:scale(.95);background:rgba(120,200,140,.25)}
+#langToggle{pointer-events:auto;display:flex;gap:2px;
+background:rgba(10,25,15,.85);border:1px solid rgba(120,200,140,.4);border-radius:24px;
+padding:3px;backdrop-filter:blur(10px)}
+#langToggle button{padding:7px 16px;border:none;border-radius:20px;background:transparent;
+color:#7a9a80;font-family:inherit;font-size:11px;letter-spacing:1px;cursor:pointer;
+transition:.3s;font-weight:bold}
+#langToggle button.active{background:rgba(120,200,140,.3);color:#fff;
+box-shadow:0 0 10px rgba(120,200,140,.4)}
+
+.page{display:none;width:100%;max-width:720px;margin:0 auto;padding:70px 12px 80px}
+.page.show{display:block;animation:fadeUp .5s cubic-bezier(.22,1,.36,1)}
+.pageHeader{text-align:center;margin-bottom:28px;padding-top:12px}
+.pageHeader .sym{font-size:42px;margin-bottom:12px;opacity:.9}
+.pageHeader h1{font-size:26px;font-weight:500;letter-spacing:6px;color:#fff;
+text-shadow:0 0 25px rgba(120,200,140,.5)}
+.pageHeader .en{font-size:10px;letter-spacing:5px;color:#7a9a80;margin-top:10px}
+
+.card{background:linear-gradient(180deg,rgba(20,40,30,.6),rgba(10,20,15,.85));
+border:1px solid rgba(120,200,140,.2);border-radius:16px;padding:22px 20px;
+margin-bottom:16px;backdrop-filter:blur(10px);
+box-shadow:0 10px 35px rgba(0,0,0,.5)}
+.card h2{font-size:17px;font-weight:500;letter-spacing:2px;color:#a8e8b8;margin-bottom:16px;
+padding-bottom:12px;border-bottom:1px solid rgba(120,200,140,.25)}
+.card h3{font-size:14px;letter-spacing:1.5px;color:#c8e8a8;margin:18px 0 10px;
+padding-left:12px;border-left:3px solid #6ab87a}
+.card h4{font-size:13px;letter-spacing:1px;color:#ffd280;margin:14px 0 8px}
+.card p{font-size:14px;line-height:1.95;color:#c8c8dd;margin-bottom:12px}
+.card ul{list-style:none;margin:10px 0}
+.card li{font-size:13.5px;line-height:1.9;color:#c0c0d0;padding-left:22px;
+position:relative;margin-bottom:8px}
+.card li::before{content:'◦';position:absolute;left:4px;color:#6ab87a;font-size:18px;top:-1px}
+
+/* ===== MAP ===== */
+.mapWrap{position:relative;width:100%;height:320px;margin:14px 0;
+border-radius:14px;overflow:hidden;border:1px solid rgba(120,200,140,.35);
+box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.mapWrap iframe{width:100%;height:100%;border:0;display:block;background:#0a0f14}
+.mapTabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.mapTab{padding:8px 14px;border-radius:20px;border:1px solid rgba(120,200,140,.35);
+background:rgba(10,25,15,.6);color:#a8e8b8;font-family:inherit;font-size:11px;
+letter-spacing:1px;cursor:pointer;transition:.25s}
+.mapTab:active{transform:scale(.95)}
+.mapTab.active{background:rgba(120,200,140,.35);color:#fff;
+box-shadow:0 0 12px rgba(120,200,140,.5)}
+.mapBtnRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+@media(max-width:480px){.mapBtnRow{grid-template-columns:1fr}}
+.mapBtn{display:block;padding:12px 14px;border-radius:10px;
+background:linear-gradient(180deg,rgba(120,200,140,.12),rgba(0,0,0,.35));
+border:1px solid rgba(120,200,140,.35);color:#a8e8b8;text-decoration:none;
+font-family:inherit;font-size:12px;letter-spacing:.5px;text-align:center;
+transition:.3s;font-weight:bold}
+.mapBtn:active{background:rgba(120,200,140,.25);transform:scale(.97)}
+.mapBtn.blue{border-color:rgba(100,170,220,.4);color:#7ab8e0}
+.mapBtn.blue:active{background:rgba(100,170,220,.25)}
+.mapBtn.gold{border-color:rgba(200,160,80,.4);color:#ffcc44}
+.mapBtn.gold:active{background:rgba(200,160,80,.25)}
+
+/* Photo grid */
+.photoGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+@media(max-width:480px){.photoGrid{grid-template-columns:1fr}}
+.photoCard{position:relative;border-radius:12px;overflow:hidden;
+border:1px solid rgba(120,200,140,.3);
+background:linear-gradient(135deg,#1a3025,#0a1a15);
+aspect-ratio:4/3;cursor:pointer;transition:.3s;
+display:flex;align-items:center;justify-content:center;text-align:center;
+padding:16px;text-decoration:none;color:#e8e8ff}
+.photoCard:active{transform:scale(.97);
+box-shadow:0 0 25px rgba(120,200,140,.6)}
+.photoCard::before{content:'';position:absolute;inset:0;
+background:
+ radial-gradient(circle at 30% 20%,rgba(120,200,140,.25),transparent 60%),
+ radial-gradient(circle at 70% 80%,rgba(200,160,80,.15),transparent 60%);
+pointer-events:none}
+.photoCard .phIcon{font-size:38px;margin-bottom:10px;display:block;position:relative}
+.photoCard .phName{font-size:13px;font-weight:bold;color:#c8e8a8;
+letter-spacing:.5px;position:relative;line-height:1.4}
+.photoCard .phSub{font-size:10px;color:#7a9a80;margin-top:6px;
+letter-spacing:.3px;position:relative;line-height:1.4}
+.photoCard .phOpen{position:absolute;bottom:8px;right:12px;
+font-size:10px;color:#7a9a80;letter-spacing:1px}
+
+.statGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:520px){.statGrid{grid-template-columns:1fr}}
+.statBox{background:rgba(0,0,0,.35);border-radius:12px;padding:14px 16px;
+border:1px solid rgba(120,200,140,.25);text-align:center}
+.statBox .label{font-size:10px;letter-spacing:2px;color:#7a9a80;text-transform:uppercase;margin-bottom:6px}
+.statBox .value{font-size:20px;font-weight:600;color:#a8e8b8;letter-spacing:1px}
+.statBox .value small{font-size:12px;color:#7a9a80;font-weight:normal}
+
+.diagram{margin:18px 0;padding:18px 16px;background:rgba(0,0,0,.4);
+border-radius:12px;border:1px dashed rgba(120,200,140,.35);
+font-size:11px;line-height:1.9;color:#c0c0d0;white-space:pre;overflow-x:auto;
+font-family:'Courier New',monospace}
+.diagram .hl{color:#a8e8b8;font-weight:bold}
+.diagram .arrow{color:#ffd280;font-weight:bold}
+.diagram .lbl{color:#7a9a80}
+
+.timeline{position:relative;padding-left:30px;margin:16px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+background:linear-gradient(180deg,#6ab87a 0%,#ffd280 50%,rgba(255,200,120,0) 100%)}
+.tlItem{position:relative;margin-bottom:20px}
+.tlItem::before{content:'';position:absolute;left:-26px;top:5px;width:10px;height:10px;
+border-radius:50%;background:radial-gradient(circle,#c8e8a8,#6ab87a);
+box-shadow:0 0 14px #6ab87a}
+.tlItem .age{font-size:11.5px;letter-spacing:1px;color:#ffd280;margin-bottom:5px;font-weight:bold}
+.tlItem .desc{font-size:13px;line-height:1.85;color:#c0c0d0}
+
+.linkBtn{display:block;padding:14px 42px 14px 16px;margin-bottom:10px;border-radius:12px;
+background:linear-gradient(180deg,rgba(120,200,140,.1),rgba(0,0,0,.35));
+border:1px solid rgba(120,200,140,.3);color:#a8e8b8;
+font-size:13px;text-decoration:none;letter-spacing:.5px;transition:.3s;
+position:relative;font-weight:bold}
+.linkBtn::after{content:'↗';position:absolute;right:16px;top:50%;transform:translateY(-50%);
+color:#7a9a80;font-size:16px}
+.linkBtn:active{background:rgba(120,200,140,.2);transform:scale(.98)}
+.linkBtn span{display:block;font-size:11px;color:#7a9a80;margin-top:4px;
+letter-spacing:.3px;font-weight:normal;line-height:1.5}
+.linkBtn.yt{border-color:rgba(255,80,80,.45);color:#ff9999}
+.linkBtn.yt::after{color:#ff8080}
+.linkBtn.news{border-color:rgba(100,170,220,.45);color:#7ab8e0}
+.linkBtn.news::after{color:#5a9ac8}
+.linkBtn.gov{border-color:rgba(200,160,80,.45);color:#ffcc44}
+.linkBtn.gov::after{color:#b89860}
+.linkBtn.gmap{border-color:rgba(66,133,244,.5);color:#7aa8e8}
+.linkBtn.gmap::after{color:#4285f4}
+
+.linksBlock{margin-top:18px;padding-top:16px;border-top:1px dashed rgba(120,200,140,.3)}
+.linksBlock .lbl{font-size:10px;letter-spacing:3px;color:#7a9a80;margin-bottom:10px;
+font-weight:bold;text-transform:uppercase}
+
+.note{margin:14px 0;padding:12px 16px;border-radius:10px;
+background:rgba(255,210,128,.08);border:1px solid rgba(255,210,128,.3);
+font-size:12.5px;line-height:1.85;color:#ffe0a8}
+.note b{color:#fff}
+.note.info{background:rgba(100,170,220,.08);border-color:rgba(100,170,220,.35);
+color:#a8d8f0}
+.note.info b{color:#fff}
+
+.newsItem{background:rgba(0,0,0,.3);border-radius:12px;padding:14px 16px;
+margin-bottom:10px;border-left:3px solid #7ab8e0}
+.newsItem .date{font-size:10px;letter-spacing:1px;color:#7a9a80;margin-bottom:5px}
+.newsItem .head{font-size:13.5px;color:#e8e8ff;line-height:1.7;margin-bottom:6px}
+.newsItem a{color:#7ab8e0;text-decoration:none;font-size:11.5px}
+
+.toc{background:rgba(0,0,0,.35);border:1px solid rgba(120,200,140,.25);
+border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:12px;line-height:2}
+.toc b{color:#a8e8b8;letter-spacing:2px;display:block;margin-bottom:8px;font-size:11px}
+.toc a{color:#ffd280;text-decoration:none;display:inline-block;margin-right:12px}
+
+.footer{text-align:center;margin-top:32px;font-size:10px;letter-spacing:2px;
+color:#4a5a50;padding:20px 0}
+
+.lang-ne,.lang-en{display:none}
+body[data-lang="ne"] .lang-ne{display:revert}
+body[data-lang="en"] .lang-en{display:revert}
+</style>
+</head>
+<body data-lang="ne">
+
+<div id="bg"></div>
+<div id="stars"></div>
+
+<div id="topBar">
+  <button id="backBtn">← <span class="lang-ne">फर्कनुहोस्</span><span class="lang-en">Back</span></button>
+  <div id="langToggle">
+    <button data-lang="ne" class="active">नेपाली</button>
+    <button data-lang="en">EN</button>
+  </div>
+</div>
+
+<!-- ============ HOME ============ -->
+<div id="app">
+  <div id="titleWrap">
+    <div id="title">रुकुम पश्चिम</div>
+    <div id="subtitle">R U K U M   W E S T</div>
+    <div id="subDivider"></div>
+    <div id="subCn">
+      <span class="lang-ne">कर्णाली प्रदेश · नेपाल</span>
+      <span class="lang-en">Karnali Province · Nepal</span>
+    </div>
+  </div>
+  <div id="btnWrap">
+    <button class="bigBtn map" id="btnMap">
+      <span class="cn"><span class="lang-ne">🗺️ नक्सा र उपग्रह दृश्य</span><span class="lang-en">🗺️ Map & Satellite View</span></span>
+      <span class="en">MAP & SATELLITE</span>
+    </button>
+    <button class="bigBtn" id="btnOverview">
+      <span class="cn"><span class="lang-ne">परिचय र तथ्याङ्क</span><span class="lang-en">Overview & Statistics</span></span>
+      <span class="en">OVERVIEW</span>
+    </button>
+    <button class="bigBtn alt" id="btnEconomy">
+      <span class="cn"><span class="lang-ne">अर्थतन्त्र र कृषि</span><span class="lang-en">Economy & Agriculture</span></span>
+      <span class="en">ECONOMY</span>
+    </button>
+    <button class="bigBtn blue" id="btnTourism">
+      <span class="cn"><span class="lang-ne">पर्यटन र प्राकृतिक स्थल</span><span class="lang-en">Tourism & Nature</span></span>
+      <span class="en">TOURISM & PHOTOS</span>
+    </button>
+    <button class="bigBtn" id="btnAdmin">
+      <span class="cn"><span class="lang-ne">पालिका र कार्यालय</span><span class="lang-en">Municipalities & Offices</span></span>
+      <span class="en">ADMINISTRATION</span>
+    </button>
+    <button class="bigBtn alt" id="btnNews">
+      <span class="cn"><span class="lang-ne">समाचार र स्रोतहरू</span><span class="lang-en">News & Sources</span></span>
+      <span class="en">NEWS</span>
+    </button>
+  </div>
+  <div class="footer">🏔️ रुकुम पश्चिमको पूर्ण जानकारी 🏔️</div>
+</div>
+
+<!-- ============ MAP PAGE ============ -->
+<div id="pageMap" class="page">
+  <div class="pageHeader">
+    <div class="sym">🗺️</div>
+    <h1><span class="lang-ne">नक्सा र उपग्रह दृश्य</span><span class="lang-en">Map & Satellite View</span></h1>
+    <div class="en"><span class="lang-ne">रुकुम पश्चिम र नेपालको पूरा नक्सा</span><span class="lang-en">Full map of Rukum West and Nepal</span></div>
+  </div>
+
+  <!-- Google Maps Satellite (Rukum West) -->
+  <div class="card">
+    <h2><span class="lang-ne">१. रुकुम पश्चिम — उपग्रह दृश्य</span><span class="lang-en">1. Rukum West — Satellite View</span></h2>
+
+    <p class="lang-ne">तल Google Maps को satellite दृश्यमा रुकुम पश्चिम जिल्लाको पूरा भू-भाग देख्न सकिन्छ। Zoom गर्न, drag गर्न मिल्छ।</p>
+    <p class="lang-en">Below you can see the full satellite view of Rukum West district. Zoom and drag to explore.</p>
+
+    <div class="mapTabs">
+      <button class="mapTab active" data-map="satellite-rukum">
+        <span class="lang-ne">🛰️ उपग्रह</span><span class="lang-en">🛰️ Satellite</span>
+      </button>
+      <button class="mapTab" data-map="terrain-rukum">
+        <span class="lang-ne">🏔️ भू-भाग</span><span class="lang-en">🏔️ Terrain</span>
+      </button>
+      <button class="mapTab" data-map="roads-rukum">
+        <span class="lang-ne">🛣️ सडक</span><span class="lang-en">🛣️ Roads</span>
+      </button>
+    </div>
+
+    <!-- OpenStreetMap iframe (free, no key needed) -->
+    <div class="mapWrap" id="mapRukum">
+      <iframe
+        id="mapFrameRukum"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=82.2%2C28.3%2C82.9%2C28.9&layer=mapnik&marker=28.6083%2C82.5167">
+      </iframe>
+    </div>
+
+    <div class="mapBtnRow">
+      <a class="mapBtn gold" href="https://www.google.com/maps/place/Rukum+West,+Nepal/@28.6083,82.5167,10z/data=!3m1!1e3" target="_blank" rel="noopener">
+        🛰️ <span class="lang-ne">Google Satellite मा खोल्नुहोस्</span><span class="lang-en">Open in Google Satellite</span>
+      </a>
+      <a class="mapBtn blue" href="https://www.google.com/maps/place/Rukum+West,+Nepal" target="_blank" rel="noopener">
+        🗺️ <span class="lang-ne">Google Maps मा खोल्नुहोस्</span><span class="lang-en">Open in Google Maps</span>
+      </a>
+    </div>
+
+    <div class="note info">
+      <b class="lang-ne">💡 सुझाव:</b>
+      <b class="lang-en">💡 Tip:</b>
+      <span class="lang-ne">Google Maps लिङ्कमा क्लिक गर्नुहोस् → त्यहाँ <b>Satellite</b> मोडमा स्विच गरेर रुकुम पश्चिमको स्पष्ट उपग्रह दृश्य हेर्न सकिन्छ। Street View पनि उपलब्ध छ।</span>
+      <span class="lang-en">Click the Google Maps link → switch to <b>Satellite</b> mode to see clear satellite imagery of Rukum West. Street View is also available.</span>
+    </div>
+  </div>
+
+  <!-- Google Maps Satellite (Nepal) -->
+  <div class="card">
+    <h2><span class="lang-ne">२. नेपाल — उपग्रह दृश्य</span><span class="lang-en">2. Nepal — Satellite View</span></h2>
+
+    <p class="lang-ne">नेपालको पूरा नक्सा — हिमाल, पहाड, तराई। रुकुम पश्चिम नेपालको मध्य-पश्चिममा पर्छ।</p>
+    <p class="lang-en">Full map of Nepal — mountains, hills, plains. Rukum West is in mid-western Nepal.</p>
+
+    <div class="mapWrap" style="height:340px;">
+      <iframe
+        id="mapFrameNepal"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=80.0%2C26.3%2C88.2%2C30.5&layer=mapnik&marker=28.3949%2C84.1240">
+      </iframe>
+    </div>
+
+    <div class="mapBtnRow">
+      <a class="mapBtn gold" href="https://www.google.com/maps/place/Nepal/@28.3949,84.1240,7z/data=!3m1!1e3" target="_blank" rel="noopener">
+        🛰️ <span class="lang-ne">Google Satellite (Nepal)</span><span class="lang-en">Google Satellite (Nepal)</span>
+      </a>
+      <a class="mapBtn blue" href="https://www.google.com/maps/place/Nepal" target="_blank" rel="noopener">
+        🗺️ <span class="lang-ne">Google Maps (Nepal)</span><span class="lang-en">Google Maps (Nepal)</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Rukum West specific locations -->
+  <div class="card">
+    <h2><span class="lang-ne">३. रुकुम पश्चिमका मुख्य स्थानहरू</span><span class="lang-en">3. Key Locations in Rukum West</span></h2>
+
+    <p class="lang-ne">तलका प्रत्येक स्थानमा क्लिक गर्नुहोस् — Google Maps मा त्यो ठाउँको उपग्रह दृश्य र फोटोहरू खुल्नेछ।</p>
+    <p class="lang-en">Click each location below — Google Maps will open with satellite view and photos of that place.</p>
+
+    <div class="photoGrid">
+      <a class="photoCard" href="https://www.google.com/maps/place/Musikot,+Rukum+West,+Nepal" target="_blank" rel="noopener">
+        <span class="phIcon">🏛️</span>
+        <div class="phName lang-ne">मुसिकोट (सदरमुकाम)</div>
+        <div class="phName lang-en">Musikot (HQ)</div>
+        <div class="phSub lang-ne">जिल्लाको प्रशासनिक केन्द्र</div>
+        <div class="phSub lang-en">District administrative center</div>
+        <div class="phOpen">MAP ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.google.com/maps/place/Syarpu+Lake,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">🏞️</span>
+        <div class="phName lang-ne">स्यार्पु ताल</div>
+        <div class="phName lang-en">Syarpu Lake</div>
+        <div class="phSub lang-ne">प्रमुख पर्यटकीय स्थल</div>
+        <div class="phSub lang-en">Major tourist destination</div>
+        <div class="phOpen">MAP ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.google.com/maps/place/Thuli+Dah,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">💧</span>
+        <div class="phName lang-ne">ठुली दह</div>
+        <div class="phName lang-en">Thuli Dah</div>
+        <div class="phSub lang-ne">धार्मिक र पर्यटकीय दह</div>
+        <div class="phSub lang-en">Religious and tourist lake</div>
+        <div class="phOpen">MAP ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.google.com/maps/place/Sankh,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">🌿</span>
+        <div class="phName lang-ne">साँख गाउँ</div>
+        <div class="phName lang-en">Sankh Village</div>
+        <div class="phSub lang-ne">क्रिस्टल ताल र हरियाली</div>
+        <div class="phSub lang-en">Crystal lake & greenery</div>
+        <div class="phOpen">MAP ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.google.com/maps/place/Banfikot,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">⛰️</span>
+        <div class="phName lang-ne">बाँफिकोट</div>
+        <div class="phName lang-en">Banfikot</div>
+        <div class="phSub lang-ne">स्यार्पु ताल नजिकको गाउँपालिका</div>
+        <div class="phSub lang-en">Rural municipality near Syarpu</div>
+        <div class="phOpen">MAP ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.google.com/maps/place/Chaurjahari,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">🏘️</span>
+        <div class="phName lang-ne">चौरजहारी</div>
+        <div class="phName lang-en">Chaurjahari</div>
+        <div class="phSub lang-ne">दक्षिणी नगरपालिका</div>
+        <div class="phSub lang-en">Southern municipality</div>
+        <div class="phOpen">MAP ↗</div>
+      </a>
+    </div>
+
+    <div class="note info">
+      <b class="lang-ne">📸 फोटो हेर्न:</b>
+      <b class="lang-en">📸 View Photos:</b>
+      <span class="lang-ne">कुनै पनि स्थानमा क्लिक गरेपछि Google Maps खुल्छ — त्यहाँ <b>Photos</b> tab मा क्लिक गर्नुहोस्। Google Maps मा स्थानीय प्रयोगकर्ताहरूले upload गरेका हजारौं फोटो हेर्न सकिन्छ। ती फोटोहरू Google ले होस्ट गर्छ — हामी ती सिधै आफ्नो App भित्र देखाउन मिल्दैन।</span>
+      <span class="lang-en">After clicking any location, Google Maps opens — click the <b>Photos</b> tab there. You can see thousands of user-uploaded photos of that place. Those photos are hosted by Google — we cannot display them directly inside our app.</span>
+    </div>
+  </div>
+
+  <div class="footer">🗺️ रुकुम पश्चिमको नक्सा 🗺️</div>
+</div>
+
+<!-- ============ OVERVIEW ============ -->
+<div id="pageOverview" class="page">
+  <div class="pageHeader">
+    <div class="sym">🏔️</div>
+    <h1><span class="lang-ne">रुकुम पश्चिम · परिचय</span><span class="lang-en">Rukum West · Overview</span></h1>
+    <div class="en"><span class="lang-ne">कर्णाली प्रदेशको सुन्दर हिमाली जिल्ला</span><span class="lang-en">A beautiful hill district of Karnali Province</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">१. मुख्य तथ्याङ्क</span><span class="lang-en">1. Key Facts</span></h2>
+
+    <div class="statGrid">
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">सदरमुकाम</span><span class="lang-en">Headquarters</span></div>
+        <div class="value"><span class="lang-ne">मुसिकोट</span><span class="lang-en">Musikot</span></div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">क्षेत्रफल</span><span class="lang-en">Area</span></div>
+        <div class="value">1,213.49 <small>km²</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">जनसंख्या (2021)</span><span class="lang-en">Population (2021)</span></div>
+        <div class="value">166,740</div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">प्रदेश</span><span class="lang-en">Province</span></div>
+        <div class="value" style="font-size:15px;"><span class="lang-ne">कर्णाली</span><span class="lang-en">Karnali</span></div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">निर्वाचन क्षेत्र</span><span class="lang-en">Constituency</span></div>
+        <div class="value">1</div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">साक्षरता</span><span class="lang-en">Literacy</span></div>
+        <div class="value">75.74<small>%</small></div>
+      </div>
+    </div>
+
+    <p class="lang-ne">रुकुम पश्चिम <b>कर्णाली प्रदेश</b>को दक्षिण-पश्चिममा पर्ने हिमाली पहाडी जिल्ला हो। २०७२ सालको प्रशासनिक पुनर्संरचनापछि पूर्वी रुकुम र पश्चिम रुकुम दुई जिल्ला बने। यसको सदरमुकाम <b>मुसिकोट</b> हो।</p>
+    <p class="lang-en">Rukum West is a hilly district in the south-west of <b>Karnali Province</b>. After the 2015 restructuring, the former Rukum District was divided into Eastern and Western Rukum. HQ is <b>Musikot</b>.</p>
+
+    <h3><span class="lang-ne">सीमाना</span><span class="lang-en">Borders</span></h3>
+    <ul>
+      <li class="lang-ne"><b>पूर्व:</b> पूर्वी रुकुम र रोल्पा</li>
+      <li class="lang-en"><b>East:</b> Eastern Rukum and Rolpa</li>
+      <li class="lang-ne"><b>दक्षिण:</b> सल्यान जिल्ला</li>
+      <li class="lang-en"><b>South:</b> Salyan District</li>
+      <li class="lang-ne"><b>पश्चिम:</b> जाजरकोट जिल्ला</li>
+      <li class="lang-en"><b>West:</b> Jajarkot District</li>
+      <li class="lang-ne"><b>उत्तर:</b> डोल्पा जिल्ला</li>
+      <li class="lang-en"><b>North:</b> Dolpa District</li>
+    </ul>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">थप</span><span class="lang-en">More</span></div>
+      <a class="linkBtn gov" href="https://dccrukumwest.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">जिल्ला समन्वय समिति</span>
+        <span class="lang-en">District Coordination Committee</span>
+      </a>
+      <a class="linkBtn" href="https://en.wikipedia.org/wiki/Western_Rukum_District" target="_blank" rel="noopener">
+        <span class="lang-ne">Wikipedia: पश्चिम रुकुम</span>
+        <span class="lang-en">Wikipedia: Western Rukum</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">२. जनसंख्या</span><span class="lang-en">2. Population</span></h2>
+
+    <div class="diagram">
+<div class="hl">जनसंख्या वृद्धि</div>
+
+२००१  <span class="hl">████████████</span> <span class="lbl">१,४०,३८७</span>
+२०११  <span class="hl">█████████████</span> <span class="lbl">१,५५,३८३</span>
+२०२१  <span class="hl">██████████████</span> <span class="lbl">१,६६,७४०</span>
+    </div>
+
+    <ul>
+      <li class="lang-ne"><b>लिङ्ग अनुपात:</b> प्रति १,००० पुरुषमा १,०५६ महिला</li>
+      <li class="lang-en"><b>Sex ratio:</b> 1,056 females per 1,000 males</li>
+      <li class="lang-ne"><b>नगरपालिकामा:</b> ५९.४६% (९९,१४३)</li>
+      <li class="lang-en"><b>Urban:</b> 59.46% (99,143)</li>
+      <li class="lang-ne"><b>साक्षरता:</b> ७५.७४%</li>
+      <li class="lang-en"><b>Literacy:</b> 75.74%</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">३. भूगोल र हावापानी</span><span class="lang-en">3. Geography and Climate</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिम <b>पहाडी भू-भाग</b> हो। सदरमुकाम मुसिकोटको उच्चाई ~१,९३३ मिटर।</p>
+    <p class="lang-en">Rukum West is <b>hilly terrain</b>. Musikot HQ elevation is ~1,933 m.</p>
+
+    <div class="diagram">
+<span class="hl">तापक्रम</span>
+अधिकतम  <span class="arrow">→</span>  ३६°C  <span class="lbl">(गर्मी)</span>
+न्यूनतम  <span class="arrow">→</span>  २°C   <span class="lbl">(जाडो)</span>
+    </div>
+
+    <ul>
+      <li class="lang-ne">गहिरो नदी खोँच — भेरी, सानीभेरी</li>
+      <li class="lang-en">Deep river gorges — Bheri, Sanibheri</li>
+      <li class="lang-ne">प्राकृतिक तालहरू — स्यार्पु, ठुली दह, साँख</li>
+      <li class="lang-en">Natural lakes — Syarpu, Thuli Dah, Sankh</li>
+      <li class="lang-ne">घना वन — सल्ला, खोटेसल्ला, उत्तिस</li>
+      <li class="lang-en">Dense forests — pine, sallo, uttis</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">४. जातीय समूह</span><span class="lang-en">4. Ethnic Groups</span></h2>
+
+    <div class="diagram">
+<span class="hl">खस आर्य (८५%)</span>
+  <span class="arrow">├─</span> क्षेत्री     <span class="hl">██████████</span> <span class="lbl">५३%</span>
+  <span class="arrow">├─</span> खस दलित   <span class="hl">████</span>       <span class="lbl">२१%</span>
+  <span class="arrow">└─</span> अन्य      <span class="hl">██</span>         <span class="lbl">११%</span>
+<span class="hl">पहाडी जनजाति (१५%)</span>
+  <span class="arrow">├─</span> मगर       <span class="hl">███</span>        <span class="lbl">१४%</span>
+  <span class="arrow">└─</span> अन्य      <span class="hl">█</span>          <span class="lbl">१%</span>
+    </div>
+
+    <ul>
+      <li class="lang-ne"><b>नेपाली:</b> ९८.३५%</li>
+      <li class="lang-en"><b>Nepali:</b> 98.35%</li>
+      <li class="lang-ne"><b>मगर खाम:</b> १.२२%</li>
+      <li class="lang-en"><b>Magar Kham:</b> 1.22%</li>
+    </ul>
+  </div>
+
+  <div class="footer">🏔️ रुकुम पश्चिम 🏔️</div>
+</div>
+
+<!-- ============ ECONOMY ============ -->
+<div id="pageEconomy" class="page">
+  <div class="pageHeader">
+    <div class="sym">🌾</div>
+    <h1><span class="lang-ne">अर्थतन्त्र र कृषि</span><span class="lang-en">Economy & Agriculture</span></h1>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">१. अर्थतन्त्रको आधार</span><span class="lang-en">1. Economic Foundation</span></h2>
+    <p class="lang-ne">रुकुम पश्चिमको अर्थतन्त्र <b>कृषिमा आधारित</b> छ। ७०%+ कार्यबल कृषिमा।</p>
+    <p class="lang-en">Economy is <b>agriculture-based</b>. Over 70% workforce in farming.</p>
+
+    <ul>
+      <li class="lang-ne"><b>कृषि:</b> धान, गहुँ, मकै, कोदो, फापर</li>
+      <li class="lang-en"><b>Agriculture:</b> Rice, wheat, maize, millet, buckwheat</li>
+      <li class="lang-ne"><b>पशुपालन:</b> गाई, भैंसी, बाख्रा, भेडा</li>
+      <li class="lang-en"><b>Livestock:</b> Cattle, buffalo, goat, sheep</li>
+      <li class="lang-ne"><b>वनजन्य:</b> जडीबुटी, काठ, दाउरा</li>
+      <li class="lang-en"><b>Forest:</b> Herbs, timber, firewood</li>
+      <li class="lang-ne"><b>रेमिट्यान्स:</b> वैदेशिक रोजगारी</li>
+      <li class="lang-en"><b>Remittance:</b> Overseas employment</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">२. कृषि तथ्याङ्क</span><span class="lang-en">2. Agricultural Data</span></h2>
+
+    <div class="statGrid">
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">कुल भूमि</span><span class="lang-en">Total Land</span></div>
+        <div class="value">१२१,२०० <small>हे.</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">उर्वर भूमि</span><span class="lang-en">Fertile</span></div>
+        <div class="value">३५,४६० <small>हे.</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">खेती गरिएको</span><span class="lang-en">Cultivated</span></div>
+        <div class="value">१६,८४१ <small>हे.</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label"><span class="lang-ne">सिँचाइ</span><span class="lang-en">Irrigated</span></div>
+        <div class="value">४,८८२ <small>हे.</small></div>
+      </div>
+    </div>
+
+    <p class="lang-ne">कुल उर्वर भूमिको <b>मात्र २९%</b> मा खेती, त्यसमध्ये पनि <b>मात्र २९%</b> मा सिँचाइ।</p>
+    <p class="lang-en">Only <b>29%</b> of fertile land is cultivated; of that only <b>29%</b> has irrigation.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">३. जलवायु परिवर्तनको प्रभाव</span><span class="lang-en">3. Climate Change Impact</span></h2>
+    <ul>
+      <li class="lang-ne"><b>वर्षा अनियमित:</b> अगस्टपछि पानी परेको छैन</li>
+      <li class="lang-en"><b>Irregular rainfall:</b> No rain since August</li>
+      <li class="lang-ne"><b>बाली सुक्दै:</b> हिउँदे बाली खेतमै सुक्यो</li>
+      <li class="lang-en"><b>Crops drying:</b> Winter crops dried</li>
+      <li class="lang-ne"><b>उत्पादन ५०% घट्यो:</b> धान र गहुँ</li>
+      <li class="lang-en"><b>50% production drop:</b> Rice and wheat</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">४. भूकम्प पुनर्निर्माण</span><span class="lang-en">4. Earthquake Reconstruction</span></h2>
+
+    <p class="lang-ne">नोभेम्बर ३, २०२३ — ६.४ म्याग्निच्युड भूकम्प। केन्द्रबिन्दु जाजरकोटको रामीडाँडा।</p>
+    <p class="lang-en">Nov 3, 2023 — 6.4 magnitude earthquake. Epicenter Ramidanda, Jajarkot.</p>
+
+    <ul>
+      <li class="lang-ne"><b>१८८ सिँचाइ र पानी प्रणाली</b> नष्ट</li>
+      <li class="lang-en"><b>188 irrigation/water systems</b> destroyed</li>
+      <li class="lang-ne"><b>३०,८५० लाभग्राही</b> पहिचान</li>
+      <li class="lang-en"><b>30,850 beneficiaries</b> identified</li>
+      <li class="lang-ne"><b>अनुदान:</b> पुनर्निर्माण ४ लाख, मर्मत ५० हजार</li>
+      <li class="lang-en"><b>Grant:</b> Rs 400,000 rebuild, 50,000 repair</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ TOURISM ============ -->
+<div id="pageTourism" class="page">
+  <div class="pageHeader">
+    <div class="sym">🏞️</div>
+    <h1><span class="lang-ne">पर्यटन र प्राकृतिक स्थल</span><span class="lang-en">Tourism & Nature</span></h1>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">१. स्यार्पु ताल</span><span class="lang-en">1. Syarpu Lake</span></h2>
+    <p class="lang-ne">बाँफिकोट गाउँपालिका वडा ३ र ५। क्षेत्रफल २.६ वर्ग किलोमिटर। मनसुनमा पूर्ण भरिन्छ।</p>
+    <p class="lang-en">Banfikot Rural Municipality wards 3 & 5. Area 2.6 sq km. Fills during monsoon.</p>
+
+    <div class="mapWrap" style="height:250px;">
+      <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=82.35%2C28.50%2C82.60%2C28.70&layer=mapnik&marker=28.60%2C82.48">
+      </iframe>
+    </div>
+
+    <div class="photoGrid">
+      <a class="photoCard" href="https://www.google.com/maps/place/Syarpu+Lake,+Rukum+West,+Nepal" target="_blank" rel="noopener">
+        <span class="phIcon">📸</span>
+        <div class="phName lang-ne">स्यार्पु तालका फोटो</div>
+        <div class="phName lang-en">Syarpu Lake Photos</div>
+        <div class="phSub lang-ne">Google Maps मा हेर्नुहोस्</div>
+        <div class="phSub lang-en">View on Google Maps</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.youtube.com/results?search_query=syarpu+lake+rukum+west" target="_blank" rel="noopener">
+        <span class="phIcon">🎥</span>
+        <div class="phName lang-ne">YouTube भिडियो</div>
+        <div class="phName lang-en">YouTube Videos</div>
+        <div class="phSub lang-ne">तालको ड्रोन दृश्य</div>
+        <div class="phSub lang-en">Drone views of the lake</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+    </div>
+
+    <ul>
+      <li class="lang-ne"><b>बिदाको दिन:</b> ~१०० पर्यटक</li>
+      <li class="lang-en"><b>Holidays:</b> ~100 tourists</li>
+      <li class="lang-ne"><b>सामान्य दिन:</b> २०-३० पर्यटक</li>
+      <li class="lang-en"><b>Normal days:</b> 20-30 tourists</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">२. ठुली दह</span><span class="lang-en">2. Thuli Dah</span></h2>
+    <p class="lang-ne">मुसिकोट नगरपालिका वडा ७। धार्मिक र पर्यटकीय दुवै महत्त्व।</p>
+    <p class="lang-en">Musikot Municipality ward 7. Both religious and tourist importance.</p>
+
+    <div class="photoGrid">
+      <a class="photoCard" href="https://www.google.com/maps/place/Thuli+Dah,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">📸</span>
+        <div class="phName lang-ne">ठुली दह फोटो</div>
+        <div class="phName lang-en">Thuli Dah Photos</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.youtube.com/results?search_query=thuli+dah+rukum+west" target="_blank" rel="noopener">
+        <span class="phIcon">🎥</span>
+        <div class="phName lang-ne">YouTube भिडियो</div>
+        <div class="phName lang-en">YouTube Videos</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">३. साँख गाउँ</span><span class="lang-en">3. Sankh Village</span></h2>
+    <p class="lang-ne">मुसिकोट-७। क्रिस्टल-क्लियर साँख ताल। हरियाली पहाडले घेरिएको। उच्चाई ~१,९३३ मिटर।</p>
+    <p class="lang-en">Musikot-7. Crystal-clear Sankh Lake. Surrounded by green hills. Elevation ~1,933 m.</p>
+
+    <div class="photoGrid">
+      <a class="photoCard" href="https://www.google.com/maps/place/Sankh,+Rukum+West" target="_blank" rel="noopener">
+        <span class="phIcon">📸</span>
+        <div class="phName lang-ne">साँख फोटो</div>
+        <div class="phName lang-en">Sankh Photos</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.youtube.com/results?search_query=sankh+village+rukum+west" target="_blank" rel="noopener">
+        <span class="phIcon">🎥</span>
+        <div class="phName lang-ne">YouTube भिडियो</div>
+        <div class="phName lang-en">YouTube Videos</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+      <a class="photoCard" href="https://www.yr.no/en/forecast/graph/2-1282833/Nepal/Karnali%20Pradesh/Rukum/S%c4%81%cc%83kh" target="_blank" rel="noopener">
+        <span class="phIcon">🌦️</span>
+        <div class="phName lang-ne">मौसम पूर्वानुमान</div>
+        <div class="phName lang-en">Weather Forecast</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+      <a class="photoCard" href="https://english.onlinekhabar.com/sankh-village-hidden-gem-west-rukum.html" target="_blank" rel="noopener">
+        <span class="phIcon">📰</span>
+        <div class="phName lang-ne">लुकेको रत्न — लेख</div>
+        <div class="phName lang-en">Hidden Gem — Article</div>
+        <div class="phOpen">OPEN ↗</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADMINISTRATION ============ -->
+<div id="pageAdmin" class="page">
+  <div class="pageHeader">
+    <div class="sym">🏛️</div>
+    <h1><span class="lang-ne">पालिका र कार्यालय</span><span class="lang-en">Municipalities & Offices</span></h1>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">१. पालिका विभाजन</span><span class="lang-en">1. Municipalities</span></h2>
+
+    <div class="diagram">
+<span class="hl">रुकुम पश्चिमका ६ स्थानीय तह</span>
+
+१. <span class="hl">मुसिकोट नगरपालिका</span>  <span class="lbl">(सदरमुकाम)</span>
+२. <span class="hl">सानीभेरी गाउँपालिका</span>
+३. <span class="hl">बाँफिकोट गाउँपालिका</span>
+४. <span class="hl">आठबिसकोट नगरपालिका</span>
+५. <span class="hl">त्रिवेणी गाउँपालिका</span>
+६. <span class="hl">चौरजहारी नगरपालिका</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">२. प्रमुख कार्यालय</span><span class="lang-en">2. Major Offices</span></h2>
+
+    <ul>
+      <li class="lang-ne"><b>जिल्ला प्रशासन कार्यालय</b> — उपेन्द्रराज पौड्याल</li>
+      <li class="lang-en"><b>District Administration Office</b> — Upendra Raj Paudyal</li>
+      <li class="lang-ne"><b>जिल्ला अदालत</b> — विद्याराज पौडेल</li>
+      <li class="lang-en"><b>District Court</b> — Vidyaraj Paudel</li>
+      <li class="lang-ne"><b>प्रहरी कार्यालय</b> — ठगबहादुर के.सी.</li>
+      <li class="lang-en"><b>Police Office</b> — Thagbahadur K.C.</li>
+      <li class="lang-ne"><b>पूर्वाधार विकास कार्यालय</b> — इ. रामचन्द्र बि.सी.</li>
+      <li class="lang-en"><b>Infrastructure Office</b> — Er. Ramchandra B.C.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">३. सम्पर्क</span><span class="lang-en">3. Contacts</span></h2>
+
+    <div class="diagram">
+<span class="hl">कार्यालय</span>              <span class="hl">फोन</span>
+<span class="arrow">──────────────────────────</span>
+DAO रुकुम पश्चिम     ०८८५३००४०
+जिल्ला अदालत         ०८८५३०१०६
+प्रहरी कार्यालय        ०८८५३०१८७
+पूर्वाधार विकास        ०८८६८०१५०
+    </div>
+  </div>
+</div>
+
+<!-- ============ NEWS ============ -->
+<div id="pageNews" class="page">
+  <div class="pageHeader">
+    <div class="sym">📰</div>
+    <h1><span class="lang-ne">समाचार र स्रोतहरू</span><span class="lang-en">News & Sources</span></h1>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">ताजा समाचार</span><span class="lang-en">Latest News</span></h2>
+
+    <div class="newsItem">
+      <div class="date">📅 अगस्ट २०२६</div>
+      <div class="head lang-ne">ठुली दह पर्यटकीय गन्तव्यको रूपमा उदाउँदै</div>
+      <div class="head lang-en">Thuli Dah emerging as tourism destination</div>
+      <a href="https://www.ecospherenews.com/detail/2428" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 मे २०२६</div>
+      <div class="head lang-ne">भूकम्पपीडित अझै अस्थायी टहरामा</div>
+      <div class="head lang-en">Earthquake survivors still in shelters</div>
+      <a href="https://kathmandupost.com/national/2026/05/11/earthquake-survivors-in-western-nepal-still-stuck-in-temporary-shelters-after-two-and-a-half-years" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 फेब्रुअरी २०२५</div>
+      <div class="head lang-ne">जलवायु परिवर्तनले किसानलाई पिरोल्दै</div>
+      <div class="head lang-en">Climate change hits farmers</div>
+      <a href="https://kathmandupost.com/money/2025/02/24/farmers-in-rukum-west-suffer-as-climate-change-bites" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 अगस्ट २०२५</div>
+      <div class="head lang-ne">स्यार्पु तालमा पर्यटक बढ्दै</div>
+      <div class="head lang-en">Tourists rising at Syarpu Lake</div>
+      <a href="https://risingnepaldaily.com/news/67260" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">समाचार स्रोतहरू</span><span class="lang-en">News Sources</span></h2>
+
+    <h3><span class="lang-ne">राष्ट्रिय पत्रिका</span><span class="lang-en">National Newspapers</span></h3>
+    <a class="linkBtn news" href="https://kathmandupost.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">Kathmandu Post</span><span class="lang-en">Kathmandu Post</span>
+    </a>
+    <a class="linkBtn news" href="https://risingnepaldaily.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">The Rising Nepal</span><span class="lang-en">The Rising Nepal</span>
+    </a>
+    <a class="linkBtn news" href="https://ekantipur.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">कान्तिपुर</span><span class="lang-en">Kantipur</span>
+    </a>
+    <a class="linkBtn news" href="https://onlinekhabar.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">अनलाइन खबर</span><span class="lang-en">Onlinekhabar</span>
+    </a>
+
+    <h3><span class="lang-ne">आधिकारिक</span><span class="lang-en">Official</span></h3>
+    <a class="linkBtn gov" href="https://dccrukumwest.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">जिल्ला समन्वय समिति</span><span class="lang-en">District Coordination Committee</span>
+    </a>
+    <a class="linkBtn gov" href="https://daorukumwest.moha.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">जिल्ला प्रशासन कार्यालय</span><span class="lang-en">District Administration Office</span>
+    </a>
+    <a class="linkBtn gov" href="https://karnali.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">कर्णाली प्रदेश सरकार</span><span class="lang-en">Karnali Province Government</span>
+    </a>
+
+    <h3><span class="lang-ne">YouTube भिडियोहरू</span><span class="lang-en">YouTube Videos</span></h3>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west" target="_blank" rel="noopener">
+      <span class="lang-ne">रुकुम पश्चिम सामान्य</span><span class="lang-en">Rukum West General</span>
+    </a>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+drone" target="_blank" rel="noopener">
+      <span class="lang-ne">ड्रोन दृश्य</span><span class="lang-en">Drone Views</span>
+    </a>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+tourism" target="_blank" rel="noopener">
+      <span class="lang-ne">पर्यटन</span><span class="lang-en">Tourism</span>
+    </a>
+  </div>
+</div>
+
+<script>
+// Language toggle
+const langButtons = document.querySelectorAll('#langToggle button');
+langButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    document.body.dataset.lang = lang;
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.documentElement.lang = lang;
+  });
+});
+
+// Page navigation
+const app = document.getElementById('app');
+const backBtn = document.getElementById('backBtn');
+const pages = {
+  map: document.getElementById('pageMap'),
+  overview: document.getElementById('pageOverview'),
+  economy: document.getElementById('pageEconomy'),
+  tourism: document.getElementById('pageTourism'),
+  admin: document.getElementById('pageAdmin'),
+  news: document.getElementById('pageNews')
+};
+
+function showPage(name){
+  app.style.display = 'none';
+  Object.values(pages).forEach(p => p.classList.remove('show'));
+  backBtn.style.display = 'block';
+  if (pages[name]) pages[name].classList.add('show');
+  window.scrollTo(0,0);
+}
+function showHome(){
+  app.style.display = 'flex';
+  Object.values(pages).forEach(p => p.classList.remove('show'));
+  backBtn.style.display = 'none';
+  window.scrollTo(0,0);
+}
+
+document.getElementById('btnMap').onclick = () => showPage('map');
+document.getElementById('btnOverview').onclick = () => showPage('overview');
+document.getElementById('btnEconomy').onclick = () => showPage('economy');
+document.getElementById('btnTourism').onclick = () => showPage('tourism');
+document.getElementById('btnAdmin').onclick = () => showPage('admin');
+document.getElementById('btnNews').onclick = () => showPage('news');
+backBtn.onclick = showHome;
+
+// Map tab switching (Rukum West iframe layer change)
+const rukumFrame = document.getElementById('mapFrameRukum');
+const rukumCoords = {
+  'satellite-rukum': 'https://www.openstreetmap.org/export/embed.html?bbox=82.2%2C28.3%2C82.9%2C28.9&layer=mapnik&marker=28.6083%2C82.5167',
+  'terrain-rukum':   'https://www.openstreetmap.org/export/embed.html?bbox=82.2%2C28.3%2C82.9%2C28.9&layer=cyclemap&marker=28.6083%2C82.5167',
+  'roads-rukum':     'https://www.openstreetmap.org/export/embed.html?bbox=82.2%2C28.3%2C82.9%2C28.9&layer=mapnik&marker=28.6083%2C82.5167'
+};
+
+document.querySelectorAll('.mapTab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mapTab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const key = tab.dataset.map;
+    if (rukumFrame && rukumCoords[key]){
+      rukumFrame.src = rukumCoords[key];
+    }
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') showHome();
+});
+
+console.log('%c🏔️ रुकुम पश्चिम · RUKUM WEST 🏔️','color:#a8e8b8;font-size:20px;font-family:Georgia;');
+</script>
+</body>
+</html>
