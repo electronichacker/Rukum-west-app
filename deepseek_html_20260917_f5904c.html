@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a1a10">
+<title>रुकुम पश्चिम · RUKUM WEST</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100%;overflow-x:hidden;background:#0a0f14;color:#e8e8ff;
+font-family:'Kalimati','Mangal','Noto Sans Devanagari',Georgia,serif;
+-webkit-font-smoothing:antialiased;line-height:1.5}
+
+/* ===== Background ===== */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+background:
+ radial-gradient(ellipse at 20% 15%,rgba(60,140,90,.25),transparent 55%),
+ radial-gradient(ellipse at 80% 30%,rgba(200,160,80,.12),transparent 55%),
+ radial-gradient(ellipse at 50% 85%,rgba(60,100,140,.15),transparent 60%),
+ #0a0f14}
+#stars{position:fixed;inset:0;z-index:1;pointer-events:none;
+background-image:
+ radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.4),transparent),
+ radial-gradient(1px 1px at 45% 65%,rgba(220,220,255,.35),transparent),
+ radial-gradient(1px 1px at 70% 20%,rgba(255,255,255,.3),transparent),
+ radial-gradient(1px 1px at 88% 55%,rgba(200,220,255,.3),transparent),
+ radial-gradient(1px 1px at 30% 85%,rgba(255,255,255,.35),transparent);
+background-size:200% 200%;animation:twk 10s ease-in-out infinite alternate}
+@keyframes twk{0%{opacity:.4}100%{opacity:.9}}
+
+/* ===== Home ===== */
+#app{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;
+align-items:center;padding:20px 16px 40px}
+#titleWrap{text-align:center;margin-top:8vh;margin-bottom:6vh;
+animation:fadeUp 1.2s cubic-bezier(.22,1,.36,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+#title{font-size:44px;font-weight:600;letter-spacing:6px;
+background:linear-gradient(180deg,#fff,#c8e8a8 40%,#6ab87a);
+-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+filter:drop-shadow(0 0 25px rgba(120,200,140,.5))}
+#subtitle{margin-top:12px;font-size:11px;letter-spacing:8px;color:#7a9a80}
+#subDivider{margin:16px auto 0;width:60px;height:1px;
+background:linear-gradient(90deg,transparent,#6ab87a,transparent)}
+#subCn{margin-top:14px;font-size:14px;letter-spacing:4px;color:#a8d8b8;opacity:.9}
+
+#btnWrap{display:flex;flex-direction:column;gap:14px;width:100%;max-width:400px;
+animation:fadeUp 1.2s .2s both}
+.bigBtn{padding:22px 22px;border-radius:16px;border:1px solid rgba(120,200,140,.4);
+background:linear-gradient(180deg,rgba(20,50,30,.6),rgba(10,25,15,.9));
+color:#e8e8ff;font-family:inherit;font-size:18px;letter-spacing:4px;cursor:pointer;
+text-align:center;backdrop-filter:blur(12px);
+transition:.35s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;
+box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.bigBtn::before{content:'';position:absolute;inset:0;border-radius:16px;
+background:radial-gradient(circle at 50% 0%,rgba(120,200,140,.35),transparent 70%);
+opacity:0;transition:.35s}
+.bigBtn:active{transform:scale(.97);box-shadow:0 0 40px rgba(120,200,140,.6)}
+.bigBtn:active::before{opacity:1}
+.bigBtn .cn{display:block;font-size:18px;letter-spacing:4px;font-weight:600}
+.bigBtn .en{display:block;font-size:10px;letter-spacing:5px;color:#7a9a80;margin-top:8px}
+.bigBtn.alt{border-color:rgba(200,160,80,.4);
+background:linear-gradient(180deg,rgba(60,45,15,.55),rgba(25,18,5,.9))}
+.bigBtn.alt::before{background:radial-gradient(circle at 50% 0%,rgba(200,160,80,.35),transparent 70%)}
+.bigBtn.alt .en{color:#b89860}
+.bigBtn.blue{border-color:rgba(100,170,220,.4);
+background:linear-gradient(180deg,rgba(20,40,60,.55),rgba(10,20,30,.9))}
+.bigBtn.blue::before{background:radial-gradient(circle at 50% 0%,rgba(100,170,220,.35),transparent 70%)}
+.bigBtn.blue .en{color:#7a9abc}
+
+/* ===== Top bar ===== */
+#topBar{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 16px;
+display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+#backBtn{pointer-events:auto;padding:10px 18px;border-radius:24px;
+border:1px solid rgba(120,200,140,.4);background:rgba(10,25,15,.85);
+color:#e8e8ff;font-family:inherit;font-size:12px;letter-spacing:2px;cursor:pointer;
+backdrop-filter:blur(10px);display:none;transition:.3s}
+#backBtn:active{transform:scale(.95);background:rgba(120,200,140,.25)}
+#langToggle{pointer-events:auto;display:flex;gap:2px;
+background:rgba(10,25,15,.85);border:1px solid rgba(120,200,140,.4);border-radius:24px;
+padding:3px;backdrop-filter:blur(10px)}
+#langToggle button{padding:7px 16px;border:none;border-radius:20px;background:transparent;
+color:#7a9a80;font-family:inherit;font-size:11px;letter-spacing:1px;cursor:pointer;
+transition:.3s;font-weight:bold}
+#langToggle button.active{background:rgba(120,200,140,.3);color:#fff;
+box-shadow:0 0 10px rgba(120,200,140,.4)}
+
+/* ===== Page ===== */
+.page{display:none;width:100%;max-width:720px;margin:0 auto;padding:70px 12px 80px}
+.page.show{display:block;animation:fadeUp .5s cubic-bezier(.22,1,.36,1)}
+.pageHeader{text-align:center;margin-bottom:28px;padding-top:12px}
+.pageHeader .sym{font-size:42px;margin-bottom:12px;opacity:.9}
+.pageHeader h1{font-size:26px;font-weight:500;letter-spacing:6px;color:#fff;
+text-shadow:0 0 25px rgba(120,200,140,.5)}
+.pageHeader .en{font-size:10px;letter-spacing:5px;color:#7a9a80;margin-top:10px}
+
+/* Cards */
+.card{background:linear-gradient(180deg,rgba(20,40,30,.6),rgba(10,20,15,.85));
+border:1px solid rgba(120,200,140,.2);border-radius:16px;padding:22px 20px;
+margin-bottom:16px;backdrop-filter:blur(10px);
+box-shadow:0 10px 35px rgba(0,0,0,.5)}
+.card h2{font-size:17px;font-weight:500;letter-spacing:2px;color:#a8e8b8;margin-bottom:16px;
+padding-bottom:12px;border-bottom:1px solid rgba(120,200,140,.25)}
+.card h3{font-size:14px;letter-spacing:1.5px;color:#c8e8a8;margin:18px 0 10px;
+padding-left:12px;border-left:3px solid #6ab87a}
+.card h4{font-size:13px;letter-spacing:1px;color:#ffd280;margin:14px 0 8px}
+.card p{font-size:14px;line-height:1.95;color:#c8c8dd;margin-bottom:12px}
+.card ul{list-style:none;margin:10px 0}
+.card li{font-size:13.5px;line-height:1.9;color:#c0c0d0;padding-left:22px;
+position:relative;margin-bottom:8px}
+.card li::before{content:'◦';position:absolute;left:4px;color:#6ab87a;font-size:18px;top:-1px}
+
+/* Stat box */
+.statGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:520px){.statGrid{grid-template-columns:1fr}}
+.statBox{background:rgba(0,0,0,.35);border-radius:12px;padding:14px 16px;
+border:1px solid rgba(120,200,140,.25);text-align:center}
+.statBox .label{font-size:10px;letter-spacing:2px;color:#7a9a80;text-transform:uppercase;margin-bottom:6px}
+.statBox .value{font-size:20px;font-weight:600;color:#a8e8b8;letter-spacing:1px}
+.statBox .value small{font-size:12px;color:#7a9a80;font-weight:normal}
+
+/* Diagram */
+.diagram{margin:18px 0;padding:18px 16px;background:rgba(0,0,0,.4);
+border-radius:12px;border:1px dashed rgba(120,200,140,.35);
+font-size:11px;line-height:1.9;color:#c0c0d0;white-space:pre;overflow-x:auto;
+font-family:'Courier New',monospace}
+.diagram .hl{color:#a8e8b8;font-weight:bold}
+.diagram .arrow{color:#ffd280;font-weight:bold}
+.diagram .lbl{color:#7a9a80}
+
+/* Timeline */
+.timeline{position:relative;padding-left:30px;margin:16px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+background:linear-gradient(180deg,#6ab87a 0%,#ffd280 50%,rgba(255,200,120,0) 100%)}
+.tlItem{position:relative;margin-bottom:20px}
+.tlItem::before{content:'';position:absolute;left:-26px;top:5px;width:10px;height:10px;
+border-radius:50%;background:radial-gradient(circle,#c8e8a8,#6ab87a);
+box-shadow:0 0 14px #6ab87a}
+.tlItem .age{font-size:11.5px;letter-spacing:1px;color:#ffd280;margin-bottom:5px;font-weight:bold}
+.tlItem .desc{font-size:13px;line-height:1.85;color:#c0c0d0}
+
+/* Link buttons */
+.linkBtn{display:block;padding:14px 42px 14px 16px;margin-bottom:10px;border-radius:12px;
+background:linear-gradient(180deg,rgba(120,200,140,.1),rgba(0,0,0,.35));
+border:1px solid rgba(120,200,140,.3);color:#a8e8b8;
+font-size:13px;text-decoration:none;letter-spacing:.5px;transition:.3s;
+position:relative;font-weight:bold}
+.linkBtn::after{content:'↗';position:absolute;right:16px;top:50%;transform:translateY(-50%);
+color:#7a9a80;font-size:16px}
+.linkBtn:active{background:rgba(120,200,140,.2);transform:scale(.98)}
+.linkBtn span{display:block;font-size:11px;color:#7a9a80;margin-top:4px;
+letter-spacing:.3px;font-weight:normal;line-height:1.5}
+.linkBtn.yt{border-color:rgba(255,80,80,.45);color:#ff9999}
+.linkBtn.yt::after{color:#ff8080}
+.linkBtn.news{border-color:rgba(100,170,220,.45);color:#7ab8e0}
+.linkBtn.news::after{color:#5a9ac8}
+.linkBtn.gov{border-color:rgba(200,160,80,.45);color:#ffcc44}
+.linkBtn.gov::after{color:#b89860}
+
+.linksBlock{margin-top:18px;padding-top:16px;border-top:1px dashed rgba(120,200,140,.3)}
+.linksBlock .lbl{font-size:10px;letter-spacing:3px;color:#7a9a80;margin-bottom:10px;
+font-weight:bold;text-transform:uppercase}
+
+.note{margin:14px 0;padding:12px 16px;border-radius:10px;
+background:rgba(255,210,128,.08);border:1px solid rgba(255,210,128,.3);
+font-size:12.5px;line-height:1.85;color:#ffe0a8}
+.note b{color:#fff}
+
+/* News item */
+.newsItem{background:rgba(0,0,0,.3);border-radius:12px;padding:14px 16px;
+margin-bottom:10px;border-left:3px solid #7ab8e0}
+.newsItem .date{font-size:10px;letter-spacing:1px;color:#7a9a80;margin-bottom:5px}
+.newsItem .head{font-size:13.5px;color:#e8e8ff;line-height:1.7;margin-bottom:6px}
+.newsItem a{color:#7ab8e0;text-decoration:none;font-size:11.5px}
+
+/* TOC */
+.toc{background:rgba(0,0,0,.35);border:1px solid rgba(120,200,140,.25);
+border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:12px;line-height:2}
+.toc b{color:#a8e8b8;letter-spacing:2px;display:block;margin-bottom:8px;font-size:11px}
+.toc a{color:#ffd280;text-decoration:none;display:inline-block;margin-right:12px}
+
+.footer{text-align:center;margin-top:32px;font-size:10px;letter-spacing:2px;
+color:#4a5a50;padding:20px 0}
+
+.lang-ne,.lang-en{display:none}
+body[data-lang="ne"] .lang-ne{display:revert}
+body[data-lang="en"] .lang-en{display:revert}
+</style>
+</head>
+<body data-lang="ne">
+
+<div id="bg"></div>
+<div id="stars"></div>
+
+<div id="topBar">
+  <button id="backBtn">← <span class="lang-ne">फर्कनुहोस्</span><span class="lang-en">Back</span></button>
+  <div id="langToggle">
+    <button data-lang="ne" class="active">नेपाली</button>
+    <button data-lang="en">EN</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="app">
+  <div id="titleWrap">
+    <div id="title">रुकुम पश्चिम</div>
+    <div id="subtitle">R U K U M   W E S T</div>
+    <div id="subDivider"></div>
+    <div id="subCn">
+      <span class="lang-ne">कर्णाली प्रदेश · नेपाल</span>
+      <span class="lang-en">Karnali Province · Nepal</span>
+    </div>
+  </div>
+  <div id="btnWrap">
+    <button class="bigBtn" id="btnOverview">
+      <span class="cn"><span class="lang-ne">परिचय र तथ्याङ्क</span><span class="lang-en">Overview & Statistics</span></span>
+      <span class="en">OVERVIEW</span>
+    </button>
+    <button class="bigBtn alt" id="btnEconomy">
+      <span class="cn"><span class="lang-ne">अर्थतन्त्र र कृषि</span><span class="lang-en">Economy & Agriculture</span></span>
+      <span class="en">ECONOMY</span>
+    </button>
+    <button class="bigBtn blue" id="btnTourism">
+      <span class="cn"><span class="lang-ne">पर्यटन र प्राकृतिक स्थल</span><span class="lang-en">Tourism & Nature</span></span>
+      <span class="en">TOURISM</span>
+    </button>
+    <button class="bigBtn" id="btnAdmin">
+      <span class="cn"><span class="lang-ne">पालिका र कार्यालय</span><span class="lang-en">Municipalities & Offices</span></span>
+      <span class="en">ADMINISTRATION</span>
+    </button>
+    <button class="bigBtn alt" id="btnNews">
+      <span class="cn"><span class="lang-ne">समाचार र स्रोतहरू</span><span class="lang-en">News & Sources</span></span>
+      <span class="en">NEWS</span>
+    </button>
+  </div>
+  <div class="footer">🏔️ रुकुम पश्चिमको पूर्ण जानकारी 🏔️</div>
+</div>
+
+<!-- ===================== OVERVIEW ===================== -->
+<div id="pageOverview" class="page">
+  <div class="pageHeader">
+    <div class="sym">🏔️</div>
+    <h1><span class="lang-ne">रुकुम पश्चिम · परिचय</span><span class="lang-en">Rukum West · Overview</span></h1>
+    <div class="en"><span class="lang-ne">कर्णाली प्रदेशको सुन्दर हिमाली जिल्ला</span><span class="lang-en">A beautiful hill district of Karnali Province</span></div>
+  </div>
+
+  <div class="toc">
+    <b>विषयसूची · CONTENTS</b>
+    <a href="#o1">१. मुख्य तथ्याङ्क</a>
+    <a href="#o2">२. जनसंख्या</a>
+    <a href="#o3">३. भूगोल र हावापानी</a>
+    <a href="#o4">४. प्रमुख जातीय समूह</a>
+  </div>
+
+  <div class="card" id="o1">
+    <h2><span class="lang-ne">१. मुख्य तथ्याङ्क</span><span class="lang-en">1. Key Facts</span></h2>
+
+    <div class="statGrid">
+      <div class="statBox">
+        <div class="label">सदरमुकाम / HQ</div>
+        <div class="value">मुसिकोट</div>
+      </div>
+      <div class="statBox">
+        <div class="label">क्षेत्रफल / Area</div>
+        <div class="value">1,213.49 <small>km²</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label">जनसंख्या (2021)</div>
+        <div class="value">166,740</div>
+      </div>
+      <div class="statBox">
+        <div class="label">प्रदेश / Province</div>
+        <div class="value" style="font-size:15px;">कर्णाली</div>
+      </div>
+      <div class="statBox">
+        <div class="label">निर्वाचन क्षेत्र</div>
+        <div class="value">१</div>
+      </div>
+      <div class="statBox">
+        <div class="label">साक्षरता दर</div>
+        <div class="value">75.74<small>%</small></div>
+      </div>
+    </div>
+
+    <p class="lang-ne">रुकुम पश्चिम <b>कर्णाली प्रदेश</b>को दक्षिण-पश्चिममा पर्ने हिमाली पहाडी जिल्ला हो। २०७२ सालको प्रशासनिक पुनर्संरचनापछि पूर्वी रुकुम र पश्चिम रुकुम दुई जिल्ला बने। यसको सदरमुकाम <b>मुसिकोट</b> हो।[citation:2]</p>
+    <p class="lang-en">Rukum West is a hilly district in the south-west of <b>Karnali Province</b>. After the 2015 administrative restructuring, the former Rukum District was divided into Eastern Rukum and Western Rukum. Its headquarters is <b>Musikot</b>.[citation:2]</p>
+
+    <h3><span class="lang-ne">सीमाना</span><span class="lang-en">Borders</span></h3>
+    <ul>
+      <li class="lang-ne"><b>पूर्व:</b> पूर्वी रुकुम र रोल्पा (लुम्बिनी प्रदेश)</li>
+      <li class="lang-en"><b>East:</b> Eastern Rukum and Rolpa (Lumbini Province)</li>
+      <li class="lang-ne"><b>दक्षिण:</b> सल्यान जिल्ला</li>
+      <li class="lang-en"><b>South:</b> Salyan District</li>
+      <li class="lang-ne"><b>पश्चिम:</b> जाजरकोट जिल्ला</li>
+      <li class="lang-en"><b>West:</b> Jajarkot District</li>
+      <li class="lang-ne"><b>उत्तर:</b> डोल्पा जिल्ला</li>
+      <li class="lang-en"><b>North:</b> Dolpa District</li>
+    </ul>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">आधिकारिक स्रोत</span><span class="lang-en">Official Sources</span></div>
+      <a class="linkBtn gov" href="https://dccrukumwest.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">जिल्ला समन्वय समिति, रुकुम पश्चिम</span>
+        <span class="lang-en">District Coordination Committee, Rukum West</span>
+        <span class="lang-ne">आधिकारिक वेबसाइट</span>
+        <span class="lang-en">Official website</span>
+      </a>
+      <a class="linkBtn" href="https://en.wikipedia.org/wiki/Western_Rukum_District" target="_blank" rel="noopener">
+        <span class="lang-ne">Wikipedia: पश्चिम रुकुम</span>
+        <span class="lang-en">Wikipedia: Western Rukum</span>
+        <span class="lang-ne">पूर्ण जानकारी</span>
+        <span class="lang-en">Complete information</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="o2">
+    <h2><span class="lang-ne">२. जनसंख्या र जनसांख्यिकी</span><span class="lang-en">2. Population and Demographics</span></h2>
+
+    <p class="lang-ne">२०२१ को राष्ट्रिय जनगणना अनुसार रुकुम पश्चिमको कुल जनसंख्या <b>१,६६,७४०</b> छ। जनसंख्या वृद्धिदर सुस्त छ — २०११ मा १,५५,३८३ थियो, जुन १० वर्षमा ७.३% मात्र बढ्यो।[citation:2]</p>
+    <p class="lang-en">According to the 2021 census, the total population is <b>166,740</b>. Growth is slow — 155,383 in 2011, only 7.3% increase in a decade.[citation:2]</p>
+
+    <div class="diagram">
+<div class="hl">जनसंख्या वृद्धि (२००१-२०२१)</div>
+
+२००१  <span class="hl">████████████</span> <span class="lbl">१,४०,३८७</span>
+२०११  <span class="hl">█████████████</span> <span class="lbl">१,५५,३८३</span>
+२०२१  <span class="hl">██████████████</span> <span class="lbl">१,६६,७४०</span>
+    </div>
+
+    <h3><span class="lang-ne">लिङ्ग अनुपात</span><span class="lang-en">Sex Ratio</span></h3>
+    <p class="lang-ne">प्रति १,००० पुरुषमा <b>१,०५६ महिला</b>। महिलाको संख्या पुरुषभन्दा बढी छ।[citation:2]</p>
+    <p class="lang-en"><b>1,056 females per 1,000 males</b>. Females outnumber males.[citation:2]</p>
+
+    <h3><span class="lang-ne">उमेर संरचना</span><span class="lang-en">Age Structure</span></h3>
+    <ul>
+      <li class="lang-ne"><b>५ वर्ष मुनिका:</b> ९.९२%</li>
+      <li class="lang-en"><b>Under 5 years:</b> 9.92%</li>
+      <li class="lang-ne"><b>साक्षरता दर:</b> ७५.७४%</li>
+      <li class="lang-en"><b>Literacy rate:</b> 75.74%</li>
+      <li class="lang-ne"><b>नगरपालिकामा बस्ने:</b> ५९.४६% (९९,१४३)</li>
+      <li class="lang-en"><b>Urban population:</b> 59.46% (99,143)</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">📊 छिटो तथ्य:</b>
+      <b class="lang-en">📊 Quick fact:</b>
+      <span class="lang-ne">नेपालको कुल जनसंख्याको लगभग <b>०.५७%</b> रुकुम पश्चिममा बस्छ।</span>
+      <span class="lang-en">About <b>0.57%</b> of Nepal's total population lives in Rukum West.</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">तथ्याङ्क स्रोत</span><span class="lang-en">Data Sources</span></div>
+      <a class="linkBtn gov" href="https://censusnepal.cbs.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">राष्ट्रिय जनगणना २०२१</span>
+        <span class="lang-en">National Census 2021</span>
+        <span class="lang-ne">केन्द्रीय तथ्याङ्क विभाग</span>
+        <span class="lang-en">Central Bureau of Statistics</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="o3">
+    <h2><span class="lang-ne">३. भूगोल र हावापानी</span><span class="lang-en">3. Geography and Climate</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिम <b>पहाडी भू-भाग</b> हो — उच्च पहाड, गहिरो खोँच, र उपत्यकाहरू। उच्चतम बिन्दु समुद्र सतहबाट ~३,००० मिटरभन्दा माथि। न्यूनतम ~१,००० मिटर। सदरमुकाम मुसिकोटको उच्चाई ~१,९३३ मिटर।[citation:7]</p>
+    <p class="lang-en">Rukum West is <b>hilly terrain</b> — high hills, deep gorges and valleys. The highest point is over 3,000 m above sea level; lowest around 1,000 m. Musikot HQ is at ~1,933 m.[citation:7]</p>
+
+    <h3><span class="lang-ne">तापक्रम</span><span class="lang-en">Temperature</span></h3>
+    <div class="diagram">
+<span class="hl">औसत अधिकतम</span>  <span class="arrow">→</span>  <span class="hl">३६°C</span>  <span class="lbl">(गर्मीको समय)</span>
+<span class="hl">औसत न्यूनतम</span>  <span class="arrow">→</span>  <span class="hl">२°C</span>  <span class="lbl">(जाडोको समय)</span>
+    </div>
+    <p class="lang-ne">हावापानी <b>समशीतोष्णदेखि ठण्डा</b> सम्म। गर्मीमा ३०°C भन्दा माथि, जाडोमा ०°C नजिक। वर्षा मनसुनमा (जुन-सेप्टेम्बर)। पछिल्लो समय <b>जलवायु परिवर्तन</b>ले वर्षा अनियमित बनाएको छ।[citation:15][citation:17]</p>
+    <p class="lang-en">Climate ranges from <b>temperate to cold</b>. Summer above 30°C, winter near 0°C. Rain during monsoon (June-September). <b>Climate change</b> has made rainfall unpredictable in recent years.[citation:15][citation:17]</p>
+
+    <h3><span class="lang-ne">प्राकृतिक विशेषता</span><span class="lang-en">Natural Features</span></h3>
+    <ul>
+      <li class="lang-ne">उच्च हिमाली श्रृंखला (उत्तर)</li>
+      <li class="lang-en">High Himalayan ranges (north)</li>
+      <li class="lang-ne">गहिरो नदी खोँच — भेरी, सानीभेरी</li>
+      <li class="lang-en">Deep river gorges — Bheri, Sanibheri</li>
+      <li class="lang-ne">प्राकृतिक तालहरू — स्यार्पु, ठुली दह, साँख</li>
+      <li class="lang-en">Natural lakes — Syarpu, Thuli Dah, Sankh</li>
+      <li class="lang-ne">घना वन — सल्ला, खोटेसल्ला, सिमल, उत्तिस</li>
+      <li class="lang-en">Dense forests — pine, sallo, simal, uttis</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">🌦️ मौसम पूर्वानुमान:</b>
+      <b class="lang-en">🌦️ Weather Forecast:</b>
+      <span class="lang-ne">रुकुम पश्चिमको लागि यो लिङ्कमा हेर्नुहोस् — <a href="https://www.yr.no/en/forecast/graph/2-1282833/Nepal/Karnali%20Pradesh/Rukum/S%c4%81%cc%83kh" target="_blank" rel="noopener" style="color:#ffd280">Yr.no मौसम</a></span>
+      <span class="lang-en">Check weather for Rukum West here — <a href="https://www.yr.no/en/forecast/graph/2-1282833/Nepal/Karnali%20Pradesh/Rukum/S%c4%81%cc%83kh" target="_blank" rel="noopener" style="color:#ffd280">Yr.no Weather</a></span>
+    </div>
+  </div>
+
+  <div class="card" id="o4">
+    <h2><span class="lang-ne">४. प्रमुख जातीय समूह</span><span class="lang-en">4. Major Ethnic Groups</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिममा <b>खस आर्य</b> समुदायको बाहुल्य छ।[citation:2]</p>
+    <p class="lang-en"><b>Khas Arya</b> is the majority community.[citation:2]</p>
+
+    <div class="diagram">
+<span class="hl">खस आर्य (कुल ८५%)</span>
+  <span class="arrow">├─</span> क्षेत्री     <span class="hl">██████████</span> <span class="lbl">५३%</span>
+  <span class="arrow">├─</span> खस दलित   <span class="hl">████</span>       <span class="lbl">२१%</span>
+  <span class="arrow">└─</span> अन्य खस    <span class="hl">██</span>         <span class="lbl">११%</span>
+
+<span class="hl">पहाडी जनजाति (१५%)</span>
+  <span class="arrow">├─</span> मगर       <span class="hl">███</span>        <span class="lbl">१४%</span>
+  <span class="arrow">└─</span> अन्य        <span class="hl">█</span>          <span class="lbl">१%</span>
+    </div>
+
+    <h3><span class="lang-ne">भाषा</span><span class="lang-en">Languages</span></h3>
+    <ul>
+      <li class="lang-ne"><b>नेपाली:</b> ९८.३५% (पहिलो भाषा)</li>
+      <li class="lang-en"><b>Nepali:</b> 98.35% (first language)</li>
+      <li class="lang-ne"><b>मगर खाम:</b> १.२२%</li>
+      <li class="lang-en"><b>Magar Kham:</b> 1.22%</li>
+    </ul>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">थप जानकारी</span><span class="lang-en">More Info</span></div>
+      <a class="linkBtn" href="https://en.wikipedia.org/wiki/Western_Rukum_District" target="_blank" rel="noopener">
+        <span class="lang-ne">Wikipedia: पश्चिम रुकुम जनसांख्यिकी</span>
+        <span class="lang-en">Wikipedia: Western Rukum Demographics</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">🏔️ रुकुम पश्चिम · RUKUM WEST 🏔️</div>
+</div>
+
+<!-- ===================== ECONOMY ===================== -->
+<div id="pageEconomy" class="page">
+  <div class="pageHeader">
+    <div class="sym">🌾</div>
+    <h1><span class="lang-ne">अर्थतन्त्र र कृषि</span><span class="lang-en">Economy & Agriculture</span></h1>
+    <div class="en"><span class="lang-ne">रुकुम पश्चिमको मुख्य आय स्रोत</span><span class="lang-en">Main livelihood of Rukum West</span></div>
+  </div>
+
+  <div class="toc">
+    <b>विषयसूची · CONTENTS</b>
+    <a href="#e1">१. अर्थतन्त्रको आधार</a>
+    <a href="#e2">२. कृषि तथ्याङ्क</a>
+    <a href="#e3">३. जलवायु परिवर्तनको प्रभाव</a>
+    <a href="#e4">४. भूकम्पपछिको पुनर्निर्माण</a>
+  </div>
+
+  <div class="card" id="e1">
+    <h2><span class="lang-ne">१. अर्थतन्त्रको आधार</span><span class="lang-en">1. Economic Foundation</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिमको अर्थतन्त्र <b>कृषिमा आधारित</b> छ। कार्यबलको <b>७०% भन्दा बढी</b> कृषिमा संलग्न छ।[citation:3]</p>
+    <p class="lang-en">Rukum West's economy is <b>agriculture-based</b>. Over <b>70% of the workforce</b> is engaged in farming.[citation:3]</p>
+
+    <h3><span class="lang-ne">मुख्य आर्थिक क्षेत्रहरू</span><span class="lang-en">Main Economic Sectors</span></h3>
+    <ul>
+      <li class="lang-ne"><b>कृषि:</b> धान, गहुँ, मकै, कोदो, फापर, तरकारी</li>
+      <li class="lang-en"><b>Agriculture:</b> Rice, wheat, maize, millet, buckwheat, vegetables</li>
+      <li class="lang-ne"><b>पशुपालन:</b> गाई, भैंसी, बाख्रा, भेडा, कुखुरा</li>
+      <li class="lang-en"><b>Livestock:</b> Cattle, buffalo, goat, sheep, poultry</li>
+      <li class="lang-ne"><b>वनजन्य उत्पादन:</b> जडीबुटी, काठ, दाउरा</li>
+      <li class="lang-en"><b>Forest products:</b> Herbs, timber, firewood</li>
+      <li class="lang-ne"><b>पर्यटन:</b> बढ्दो क्षेत्र (ताल, धार्मिक स्थल)</li>
+      <li class="lang-en"><b>Tourism:</b> Growing sector (lakes, religious sites)</li>
+      <li class="lang-ne"><b>रेमिट्यान्स:</b> वैदेशिक रोजगारीबाट आउने रकम</li>
+      <li class="lang-en"><b>Remittance:</b> Money from overseas employment</li>
+    </ul>
+  </div>
+
+  <div class="card" id="e2">
+    <h2><span class="lang-ne">२. कृषि तथ्याङ्क</span><span class="lang-en">2. Agricultural Data</span></h2>
+
+    <div class="statGrid">
+      <div class="statBox">
+        <div class="label">कुल भूमि</div>
+        <div class="value">१२१,२०० <small>हेक्टर</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label">उर्वर भूमि</div>
+        <div class="value">३५,४६० <small>हेक्टर</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label">खेती गरिएको</div>
+        <div class="value">१६,८४१ <small>हेक्टर</small></div>
+      </div>
+      <div class="statBox">
+        <div class="label">सिँचाइ सुविधा</div>
+        <div class="value">४,८८२ <small>हेक्टर</small></div>
+      </div>
+    </div>
+
+    <p class="lang-ne">कुल उर्वर भूमिको <b>मात्र २९%</b> मा खेती हुन्छ। त्यसमध्ये पनि <b>मात्र २९%</b> मा सिँचाइ सुविधा छ। बाँकी वर्षाको भरमा।[citation:17]</p>
+    <p class="lang-en">Only <b>29%</b> of fertile land is cultivated. Of that, only <b>29%</b> has irrigation. The rest depends on rainfall.[citation:17]</p>
+
+    <div class="diagram">
+<div class="hl">कृषि भूमिको अवस्था</div>
+
+कुल भूमि          <span class="hl">████████████████████</span> <span class="lbl">१२१,२०० हे.</span>
+उर्वर भूमि        <span class="hl">██████</span>               <span class="lbl">३५,४६० हे. (२९%)</span>
+खेती गरिएको      <span class="hl">███</span>                  <span class="lbl">१६,८४१ हे. (१४%)</span>
+सिँचाइ सुविधा    <span class="hl">█</span>                    <span class="lbl">४,८८२ हे. (४%)</span>
+    </div>
+
+    <h3><span class="lang-ne">मुख्य बालीहरू</span><span class="lang-en">Main Crops</span></h3>
+    <ul>
+      <li class="lang-ne"><b>धान:</b> मुख्य खाद्यान्न, मनसुनमा</li>
+      <li class="lang-en"><b>Rice:</b> Main staple, monsoon crop</li>
+      <li class="lang-ne"><b>गहुँ:</b> हिउँदे बाली</li>
+      <li class="lang-en"><b>Wheat:</b> Winter crop</li>
+      <li class="lang-ne"><b>मकै:</b> पहाडी क्षेत्रमा</li>
+      <li class="lang-en"><b>Maize:</b> Grown in hilly areas</li>
+      <li class="lang-ne"><b>कोदो, फापर, जौ:</b> परम्परागत, कम पानी चाहिने</li>
+      <li class="lang-en"><b>Millet, buckwheat, barley:</b> Traditional, low water need</li>
+      <li class="lang-ne"><b>तरकारी:</b> बढ्दो व्यावसायिक खेती</li>
+      <li class="lang-en"><b>Vegetables:</b> Growing commercial farming</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">💡 सुझाव:</b>
+      <b class="lang-en">💡 Recommendation:</b>
+      <span class="lang-ne">कृषि अधिकारीहरू परम्परागत बाली (कोदो, फापर, जौ) फर्काउन सुझाव दिन्छन् — यी कम पानी र मल चाहिन्छ।[citation:17]</span>
+      <span class="lang-en">Agriculture officers recommend returning to traditional crops (millet, buckwheat, barley) — these need less water and fertilizer.[citation:17]</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">कृषि समाचार</span><span class="lang-en">Agriculture News</span></div>
+      <a class="linkBtn news" href="https://kathmandupost.com/money/2025/02/24/farmers-in-rukum-west-suffer-as-climate-change-bites" target="_blank" rel="noopener">
+        <span class="lang-ne">Kathmandu Post: जलवायु परिवर्तनले किसानलाई पिरोल्दै</span>
+        <span class="lang-en">Kathmandu Post: Climate change hits farmers</span>
+        <span class="lang-ne">फेब्रुअरी २०२५</span>
+        <span class="lang-en">February 2025</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="e3">
+    <h2><span class="lang-ne">३. जलवायु परिवर्तनको प्रभाव</span><span class="lang-en">3. Impact of Climate Change</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिमका किसानहरूले पछिल्ला वर्षहरूमा गम्भीर समस्या भोगिरहेका छन्।[citation:17]</p>
+    <p class="lang-en">Farmers in Rukum West face serious problems in recent years.[citation:17]</p>
+
+    <h3><span class="lang-ne">मुख्य समस्याहरू</span><span class="lang-en">Main Problems</span></h3>
+    <ul>
+      <li class="lang-ne"><b>समयमा वर्षा नहुने:</b> अगस्टपछि पानी परेको छैन</li>
+      <li class="lang-en"><b>No timely rainfall:</b> No rain since August</li>
+      <li class="lang-ne"><b>बाली सुक्ने:</b> हिउँदे बाली खेतमै सुक्यो</li>
+      <li class="lang-en"><b>Crops drying:</b> Winter crops dried in fields</li>
+      <li class="lang-ne"><b>कीराको आक्रमण:</b> रोग र कीरा बढ्दै</li>
+      <li class="lang-en"><b>Pest infestation:</b> Diseases and pests increasing</li>
+      <li class="lang-ne"><b>पानीको स्रोत सुक्दै:</b> झरना, कुवा सुक्दै</li>
+      <li class="lang-en"><b>Water sources drying:</b> Springs and wells drying</li>
+      <li class="lang-ne"><b>उत्पादन ५०% घट्यो:</b> धान र गहुँ उत्पादन आधा घट्यो</li>
+      <li class="lang-en"><b>50% production drop:</b> Rice and wheat halved</li>
+    </ul>
+
+    <h3><span class="lang-ne">किसानको मनोविज्ञानमा प्रभाव</span><span class="lang-en">Psychological Impact on Farmers</span></h3>
+    <p class="lang-ne">कृषि अधिकारी भन्छन्: "जलवायु परिवर्तनको सिधा प्रभावले खेती कमजोर हुन्छ, जसले किसानको मनोविज्ञानलाई असर गर्छ। जलवायु परिवर्तनले एक पछि अर्को समस्या ल्याउँछ।"[citation:17]</p>
+    <p class="lang-en">An agriculture officer says: "The direct impact of climate change weakens farming, affecting farmers' psychology. Climate change brings one problem after another."[citation:17]</p>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">थप पढ्नुहोस्</span><span class="lang-en">Read More</span></div>
+      <a class="linkBtn news" href="https://kathmandupost.com/money/2025/02/24/farmers-in-rukum-west-suffer-as-climate-change-bites" target="_blank" rel="noopener">
+        <span class="lang-ne">Kathmandu Post: किसानको संघर्ष</span>
+        <span class="lang-en">Kathmandu Post: Farmers' Struggle</span>
+        <span class="lang-ne">पूरा लेख</span>
+        <span class="lang-en">Full article</span>
+      </a>
+      <a class="linkBtn" href="https://www.fao.org/nepal/" target="_blank" rel="noopener">
+        <span class="lang-ne">FAO नेपाल</span>
+        <span class="lang-en">FAO Nepal</span>
+        <span class="lang-ne">कृषि र खाद्य सुरक्षा</span>
+        <span class="lang-en">Agriculture and food security</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="e4">
+    <h2><span class="lang-ne">४. भूकम्पपछिको पुनर्निर्माण (२०२३-२०२६)</span><span class="lang-en">4. Post-Earthquake Reconstruction (2023-2026)</span></h2>
+
+    <p class="lang-ne">नोभेम्बर ३, २०२३ मा <b>६.४ म्याग्निच्युडको भूकम्प</b>ले जाजरकोट र रुकुम पश्चिमलाई गम्भीर क्षति पुर्‍यायो। केन्द्रबिन्दु जाजरकोटको रामीडाँडा।[citation:3]</p>
+    <p class="lang-en">On November 3, 2023, a <b>6.4 magnitude earthquake</b> severely damaged Jajarkot and Rukum West. Epicenter was Ramidanda, Jajarkot.[citation:3]</p>
+
+    <h3><span class="lang-ne">क्षतिको विवरण</span><span class="lang-en">Damage Details</span></h3>
+    <ul>
+      <li class="lang-ne"><b>१८८ सिँचाइ र पिउने पानी प्रणाली</b> नष्ट</li>
+      <li class="lang-en"><b>188 irrigation and drinking water systems</b> destroyed</li>
+      <li class="lang-ne"><b>२१% किसानको</b> सिँचाइ प्रणालीमा क्षति</li>
+      <li class="lang-en"><b>21% farmers</b> reported irrigation damage</li>
+      <li class="lang-ne"><b>२०% किसानको</b> खेतमा क्षति</li>
+      <li class="lang-en"><b>20% farmers</b> reported farmland damage</li>
+      <li class="lang-ne">धान र गहुँ उत्पादन <b>५० क्विन्टल</b> घट्यो</li>
+      <li class="lang-en">Rice and wheat production dropped by <b>50 quintals</b></li>
+    </ul>
+
+    <h3><span class="lang-ne">पुनर्निर्माणमा ढिलाइ</span><span class="lang-en">Reconstruction Delays</span></h3>
+    <div class="timeline">
+      <div class="tlItem">
+        <div class="age lang-ne">नोभेम्बर २०२३</div>
+        <div class="age lang-en">November 2023</div>
+        <div class="desc lang-ne">भूकम्प — १५३ जनाको मृत्यु, हजारौं घर नष्ट</div>
+        <div class="desc lang-en">Earthquake — 153 deaths, thousands of homes destroyed</div>
+      </div>
+      <div class="tlItem">
+        <div class="age lang-ne">२०२४</div>
+        <div class="age lang-en">2024</div>
+        <div class="desc lang-ne">सरकारले पुनर्निर्माण अनुदान घोषणा — पुनर्निर्माणको लागि ४ लाख, मर्मतको लागि ५० हजार</div>
+        <div class="desc lang-en">Government announces reconstruction grants — Rs 400,000 for rebuild, Rs 50,000 for repair</div>
+      </div>
+      <div class="tlItem">
+        <div class="age lang-ne">२०२५-२०२६</div>
+        <div class="age lang-en">2025-2026</div>
+        <div class="desc lang-ne">हजारौं परिवार अझै अस्थायी टहरामा। DDA (क्षति मूल्याङ्कन) विवादले पुनर्निर्माण रोकियो। रुकुम पश्चिममा ३०,८५० लाभग्राही पहिचान।[citation:14]</div>
+        <div class="desc lang-en">Thousands still in temporary shelters. DDA (damage assessment) dispute stalled reconstruction. 30,850 beneficiaries identified in Rukum West.[citation:14]</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b class="lang-ne">⚠️ वर्तमान स्थिति:</b>
+      <b class="lang-en">⚠️ Current situation:</b>
+      <span class="lang-ne">UNDP र UN-Habitat ले ५ पालिकामा १५ सिँचाइ नहर र ३ पोखरी पुनर्निर्माण गर्दैछन्।[citation:3]</span>
+      <span class="lang-en">UNDP and UN-Habitat are rebuilding 15 irrigation canals and 3 ponds across 5 municipalities.[citation:3]</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">भूकम्प र पुनर्निर्माण</span><span class="lang-en">Earthquake & Reconstruction</span></div>
+      <a class="linkBtn news" href="https://kathmandupost.com/national/2026/05/11/earthquake-survivors-in-western-nepal-still-stuck-in-temporary-shelters-after-two-and-a-half-years" target="_blank" rel="noopener">
+        <span class="lang-ne">Kathmandu Post: भूकम्पपीडित अझै टहरामा</span>
+        <span class="lang-en">Kathmandu Post: Survivors still in shelters</span>
+        <span class="lang-ne">मे २०२६</span>
+        <span class="lang-en">May 2026</span>
+      </a>
+      <a class="linkBtn" href="https://www.undp.org/nepal/stories/improving-lives-and-livelihoods-areas-affected-jajarkot-earthquake" target="_blank" rel="noopener">
+        <span class="lang-ne">UNDP: जीविकोपार्जन पुनर्स्थापना</span>
+        <span class="lang-en">UNDP: Livelihood Restoration</span>
+        <span class="lang-ne">मार्च २०२६</span>
+        <span class="lang-en">March 2026</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">🌾 रुकुम पश्चिमको अर्थतन्त्र 🌾</div>
+</div>
+
+<!-- ===================== TOURISM ===================== -->
+<div id="pageTourism" class="page">
+  <div class="pageHeader">
+    <div class="sym">🏞️</div>
+    <h1><span class="lang-ne">पर्यटन र प्राकृतिक स्थल</span><span class="lang-en">Tourism & Natural Places</span></h1>
+    <div class="en"><span class="lang-ne">रुकुम पश्चिमका सुन्दर ठाउँहरू</span><span class="lang-en">Beautiful places in Rukum West</span></div>
+  </div>
+
+  <div class="toc">
+    <b>विषयसूची · CONTENTS</b>
+    <a href="#t1">१. स्यार्पु ताल</a>
+    <a href="#t2">२. ठुली दह</a>
+    <a href="#t3">३. साँख गाउँ</a>
+    <a href="#t4">४. अन्य पर्यटकीय स्थल</a>
+  </div>
+
+  <div class="card" id="t1">
+    <h2><span class="lang-ne">१. स्यार्पु ताल (Syarpu Lake)</span><span class="lang-en">1. Syarpu Lake</span></h2>
+
+    <p class="lang-ne">स्यार्पु ताल बाँफिकोट गाउँपालिका वडा नं. ३ र ५ मा अवस्थित छ। क्षेत्रफल <b>२.६ वर्ग किलोमिटर</b>। मनसुनमा ताल पूर्ण रूपमा भरिन्छ र थप आकर्षक हुन्छ।[citation:4]</p>
+    <p class="lang-en">Syarpu Lake is located in Banfikot Rural Municipality wards 3 and 5. Area <b>2.6 sq km</b>. It fills up during monsoon and becomes even more attractive.[citation:4]</p>
+
+    <h3><span class="lang-ne">पर्यटक तथ्याङ्क</span><span class="lang-en">Tourist Data</span></h3>
+    <ul>
+      <li class="lang-ne"><b>बिदाको दिन:</b> ~१०० आन्तरिक पर्यटक</li>
+      <li class="lang-en"><b>Holidays:</b> ~100 domestic tourists</li>
+      <li class="lang-ne"><b>सामान्य दिन:</b> २०-३० पर्यटक</li>
+      <li class="lang-en"><b>Normal days:</b> 20-30 tourists</li>
+      <li class="lang-ne"><b>गतिविधि:</b> डुङ्गा सयर, माछा खाने, दृश्यावलोकन</li>
+      <li class="lang-en"><b>Activities:</b> Boating, fish eating, sightseeing</li>
+    </ul>
+
+    <h3><span class="lang-ne">विशेषता</span><span class="lang-en">Features</span></h3>
+    <ul>
+      <li class="lang-ne"><b>मनसुनमा:</b> ताल भरिन्छ, रंग बदलिन्छ</li>
+      <li class="lang-en"><b>Monsoon:</b> Lake fills, color changes</li>
+      <li class="lang-ne"><b>अगस्ट-अक्टोबर:</b> पूर्ण र सुन्दर</li>
+      <li class="lang-en"><b>August-October:</b> Full and vibrant</li>
+      <li class="lang-ne"><b>जाडोमा:</b> सानो हुन्छ तर रमणीय</li>
+      <li class="lang-en"><b>Winter:</b> Shrinks but still picturesque</li>
+      <li class="lang-ne"><b>मान्यता:</b> "स्वास्थ्यको लागि राम्रो" — हिमाली झरनाबाट पोषित</li>
+      <li class="lang-en"><b>Belief:</b> "Good for health" — fed by Himalayan streams</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">📍 स्थान:</b>
+      <b class="lang-en">📍 Location:</b>
+      <span class="lang-ne">बाँफिकोट गाउँपालिका, रुकुम पश्चिम। वन कार्यालयले ताल क्षेत्र घेराबार गरेको छ। कर्णाली प्रदेशको प्रमुख पर्यटकीय गन्तव्यको रूपमा मान्यता।[citation:4]</span>
+      <span class="lang-en">Banfikot Rural Municipality, Rukum West. Fenced by Forest Office. Recognized as a major tourist destination of Karnali Province.[citation:4]</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">स्यार्पु ताल</span><span class="lang-en">Syarpu Lake</span></div>
+      <a class="linkBtn news" href="https://risingnepaldaily.com/news/67260" target="_blank" rel="noopener">
+        <span class="lang-ne">Rising Nepal: स्यार्पु तालमा पर्यटक बढ्दै</span>
+        <span class="lang-en">Rising Nepal: Tourists rising at Syarpu</span>
+        <span class="lang-ne">अगस्ट २०२५</span>
+        <span class="lang-en">August 2025</span>
+      </a>
+      <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=syarpu+lake+rukum+west" target="_blank" rel="noopener">
+        <span class="lang-ne">YouTube: स्यार्पु ताल भिडियो</span>
+        <span class="lang-en">YouTube: Syarpu Lake Videos</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="t2">
+    <h2><span class="lang-ne">२. ठुली दह (Thuli Dah)</span><span class="lang-en">2. Thuli Dah</span></h2>
+
+    <p class="lang-ne">ठुली दह मुसिकोट नगरपालिका वडा नं. ७ मा अवस्थित छ। यो <b>धार्मिक र पर्यटकीय</b> दुवै दृष्टिले महत्वपूर्ण छ।[citation:12]</p>
+    <p class="lang-en">Thuli Dah is in Musikot Municipality ward 7. It is important both <b>religiously and touristically</b>.[citation:12]</p>
+
+    <h3><span class="lang-ne">विकास कार्यक्रम</span><span class="lang-en">Development Programs</span></h3>
+    <ul>
+      <li class="lang-ne"><b>पदमार्ग:</b> मध्य पहाडी राजमार्गबाट ठुली दहसम्म पैदल बाटो</li>
+      <li class="lang-en"><b>Foot trail:</b> From Mid-Hill Highway to Thuli Dah</li>
+      <li class="lang-ne"><b>पिकनिक स्थल:</b> व्यवस्थित गरिएको</li>
+      <li class="lang-en"><b>Picnic spot:</b> Developed</li>
+      <li class="lang-ne"><b>खानेपानी:</b> सुविधा थपिएको</li>
+      <li class="lang-en"><b>Drinking water:</b> Facilities added</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">🌟 सम्भावना:</b>
+      <b class="lang-en">🌟 Potential:</b>
+      <span class="lang-ne">वडा अध्यक्ष एक्कबहादुर पाण्डेका अनुसार, ठुली दहलाई व्यवस्थित गन्तव्यको रूपमा विकास गर्न पूर्वाधार निर्माण भइरहेको छ। स्थानीय व्यवसाय र पर्यटनलाई प्रोत्साहन गर्ने सम्भावना।[citation:12]</span>
+      <span class="lang-en">According to Ward Chair Ekkabahadur Pandey, infrastructure is being built to develop Thuli Dah as a managed destination. Potential to promote local business and tourism.[citation:12]</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">ठुली दह</span><span class="lang-en">Thuli Dah</span></div>
+      <a class="linkBtn news" href="https://www.ecospherenews.com/detail/2428" target="_blank" rel="noopener">
+        <span class="lang-ne">Ecosphere News: ठुली दह पर्यटकीय गन्तव्य</span>
+        <span class="lang-en">Ecosphere News: Thuli Dah emerging destination</span>
+        <span class="lang-ne">अगस्ट २०२६</span>
+        <span class="lang-en">August 2026</span>
+      </a>
+      <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=thuli+dah+rukum+west" target="_blank" rel="noopener">
+        <span class="lang-ne">YouTube: ठुली दह भिडियो</span>
+        <span class="lang-en">YouTube: Thuli Dah Videos</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="t3">
+    <h2><span class="lang-ne">३. साँख गाउँ र ताल (Sankh Village)</span><span class="lang-en">3. Sankh Village & Lake</span></h2>
+
+    <p class="lang-ne">साँख गाउँ मुसिकोट नगरपालिका वडा नं. ७ मा अवस्थित छ। हरियाली पहाडले घेरिएको, बीचमा <b>क्रिस्टल-क्लियर साँख ताल</b>। तस्बिर जस्तै सुन्दर।[citation:18]</p>
+    <p class="lang-en">Sankh village is in Musikot Municipality ward 7. Surrounded by lush green hills, with a <b>crystal-clear Sankh Lake</b> at its heart. Like a picture book scene.[citation:18]</p>
+
+    <h3><span class="lang-ne">विशेषता</span><span class="lang-en">Features</span></h3>
+    <ul>
+      <li class="lang-ne"><b>प्राकृतिक सौन्दर्य:</b> हरियाली पहाड, ताल</li>
+      <li class="lang-en"><b>Natural beauty:</b> Green hills, lake</li>
+      <li class="lang-ne"><b>मेहनती बासिन्दा:</b> गाउँको विकासमा समर्पित</li>
+      <li class="lang-en"><b>Hardworking residents:</b> Dedicated to village development</li>
+      <li class="lang-ne"><b>कृषि र पर्यटन:</b> ठूलो सम्भावना</li>
+      <li class="lang-en"><b>Agriculture & tourism:</b> Huge potential</li>
+      <li class="lang-ne"><b>आन्तरिक पर्यटक:</b> क्रमशः बढ्दै</li>
+      <li class="lang-en"><b>Domestic tourists:</b> Gradually increasing</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">🌄 उच्चाई:</b>
+      <b class="lang-en">🌄 Elevation:</b>
+      <span class="lang-ne">साँख बस्ती ~१,९३३ मिटरमा। मौसम ठण्डा र आरामदायक।[citation:7]</span>
+      <span class="lang-en">Sankh village at ~1,933 m. Cool and pleasant climate.[citation:7]</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">साँख गाउँ</span><span class="lang-en">Sankh Village</span></div>
+      <a class="linkBtn news" href="https://english.onlinekhabar.com/sankh-village-hidden-gem-west-rukum.html" target="_blank" rel="noopener">
+        <span class="lang-ne">Onlinekhabar: साँख गाउँ — लुकेको रत्न</span>
+        <span class="lang-en">Onlinekhabar: Sankh Village — Hidden Gem</span>
+        <span class="lang-ne">जनवरी २०२६</span>
+        <span class="lang-en">January 2026</span>
+      </a>
+      <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=sankh+village+rukum+west" target="_blank" rel="noopener">
+        <span class="lang-ne">YouTube: साँख गाउँ भिडियो</span>
+        <span class="lang-en">YouTube: Sankh Village Videos</span>
+      </a>
+      <a class="linkBtn" href="https://www.yr.no/en/forecast/graph/2-1282833/Nepal/Karnali%20Pradesh/Rukum/S%c4%81%cc%83kh" target="_blank" rel="noopener">
+        <span class="lang-ne">Yr.no: मौसम पूर्वानुमान</span>
+        <span class="lang-en">Yr.no: Weather Forecast</span>
+        <span class="lang-ne">साँखको मौसम</span>
+        <span class="lang-en">Weather for Sankh</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="t4">
+    <h2><span class="lang-ne">४. अन्य पर्यटकीय स्थल र गतिविधि</span><span class="lang-en">4. Other Tourist Places and Activities</span></h2>
+
+    <h3><span class="lang-ne">अन्य स्थलहरू</span><span class="lang-en">Other Places</span></h3>
+    <ul>
+      <li class="lang-ne"><b>भेरी नदी:</b> राफ्टिङ, माछा</li>
+      <li class="lang-en"><b>Bheri River:</b> Rafting, fishing</li>
+      <li class="lang-ne"><b>मुसिकोट बजार:</b> स्थानीय बजार, संस्कृति</li>
+      <li class="lang-en"><b>Musikot Bazaar:</b> Local market, culture</li>
+      <li class="lang-ne"><b>धार्मिक स्थल:</b> विभिन्न मन्दिर, देवस्थल</li>
+      <li class="lang-en"><b>Religious sites:</b> Various temples</li>
+      <li class="lang-ne"><b>किल्ला:</b> ऐतिहासिक स्थलहरू</li>
+      <li class="lang-en"><b>Forts:</b> Historical sites</li>
+    </ul>
+
+    <h3><span class="lang-ne">गतिविधिहरू</span><span class="lang-en">Activities</span></h3>
+    <ul>
+      <li class="lang-ne"><b>ट्रेकिङ:</b> पहाडी पदमार्ग</li>
+      <li class="lang-en"><b>Trekking:</b> Hill trails</li>
+      <li class="lang-ne"><b>डुङ्गा:</b> स्यार्पु तालमा</li>
+      <li class="lang-en"><b>Boating:</b> At Syarpu Lake</li>
+      <li class="lang-ne"><b>पिकनिक:</b> ठुली दह, ताल किनारमा</li>
+      <li class="lang-en"><b>Picnic:</b> At Thuli Dah, lakeside</li>
+      <li class="lang-ne"><b>स्थानीय खाना:</b> माछा, दाल, भात</li>
+      <li class="lang-en"><b>Local food:</b> Fish, dal, bhat</li>
+      <li class="lang-ne"><b>होमस्टे:</b> गाउँ बसाइ</li>
+      <li class="lang-en"><b>Homestay:</b> Village stay</li>
+    </ul>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">पर्यटन स्रोत</span><span class="lang-en">Tourism Sources</span></div>
+      <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+tourism+places" target="_blank" rel="noopener">
+        <span class="lang-ne">YouTube: रुकुम पश्चिम पर्यटन</span>
+        <span class="lang-en">YouTube: Rukum West Tourism</span>
+        <span class="lang-ne">भिडियोहरूको सूची</span>
+        <span class="lang-en">List of videos</span>
+      </a>
+      <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+drone+view" target="_blank" rel="noopener">
+        <span class="lang-ne">YouTube: ड्रोन दृश्य</span>
+        <span class="lang-en">YouTube: Drone Views</span>
+        <span class="lang-ne">हावाबाट रुकुम</span>
+        <span class="lang-en">Rukum from above</span>
+      </a>
+      <a class="linkBtn news" href="https://risingnepaldaily.com/news/67260" target="_blank" rel="noopener">
+        <span class="lang-ne">Rising Nepal: पर्यटन समाचार</span>
+        <span class="lang-en">Rising Nepal: Tourism News</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">🏞️ रुकुम पश्चिमका सुन्दर ठाउँहरू 🏞️</div>
+</div>
+
+<!-- ===================== ADMINISTRATION ===================== -->
+<div id="pageAdmin" class="page">
+  <div class="pageHeader">
+    <div class="sym">🏛️</div>
+    <h1><span class="lang-ne">पालिका र कार्यालय</span><span class="lang-en">Municipalities & Offices</span></h1>
+    <div class="en"><span class="lang-ne">प्रशासनिक विभाजन र सरकारी कार्यालय</span><span class="lang-en">Administrative divisions and government offices</span></div>
+  </div>
+
+  <div class="toc">
+    <b>विषयसूची · CONTENTS</b>
+    <a href="#ad1">१. पालिका विभाजन</a>
+    <a href="#ad2">२. प्रमुख सरकारी कार्यालय</a>
+    <a href="#ad3">३. सम्पर्क विवरण</a>
+  </div>
+
+  <div class="card" id="ad1">
+    <h2><span class="lang-ne">१. पालिका विभाजन</span><span class="lang-en">1. Municipality Divisions</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिममा <b>६ वटा स्थानीय तह</b> छन् — १ नगरपालिका र ५ गाउँपालिका।[citation:10]</p>
+    <p class="lang-en">Rukum West has <b>6 local units</b> — 1 municipality and 5 rural municipalities.[citation:10]</p>
+
+    <div class="diagram">
+<div class="hl">रुकुम पश्चिमका स्थानीय तहहरू</div>
+
+<span class="hl">१. मुसिकोट नगरपालिका</span>     <span class="lbl">(सदरमुकाम)</span>
+   <span class="arrow">→</span> वडा: १४ | जनसंख्या: उच्च
+
+<span class="hl">२. सानीभेरी गाउँपालिका</span>
+   <span class="arrow">→</span> वडा: ८
+
+<span class="hl">३. बाँफिकोट गाउँपालिका</span>
+   <span class="arrow">→</span> वडा: १०
+
+<span class="hl">४. आठबिसकोट नगरपालिका</span>
+   <span class="arrow">→</span> वडा: १४
+
+<span class="hl">५. त्रिवेणी गाउँपालिका</span>
+   <span class="arrow">→</span> वडा: ८
+
+<span class="hl">६. चौरजहारी नगरपालिका</span>
+   <span class="arrow">→</span> वडा: १४
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">आधिकारिक स्रोत</span><span class="lang-en">Official Sources</span></div>
+      <a class="linkBtn gov" href="https://dccrukumwest.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">जिल्ला समन्वय समिति, रुकुम पश्चिम</span>
+        <span class="lang-en">District Coordination Committee, Rukum West</span>
+        <span class="lang-ne">सबै पालिकाको जानकारी</span>
+        <span class="lang-en">All municipality info</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="ad2">
+    <h2><span class="lang-ne">२. प्रमुख सरकारी कार्यालय</span><span class="lang-en">2. Major Government Offices</span></h2>
+
+    <p class="lang-ne">रुकुम पश्चिममा <b>१७ भन्दा बढी सरकारी कार्यालयहरू</b> छन्। जिल्ला प्रशासन कार्यालय मुसिकोटमा।[citation:13]</p>
+    <p class="lang-en">Rukum West has <b>over 17 government offices</b>. The District Administration Office is in Musikot.[citation:13]</p>
+
+    <h3><span class="lang-ne">प्रमुख कार्यालयहरू</span><span class="lang-en">Major Offices</span></h3>
+    <ul>
+      <li class="lang-ne"><b>जिल्ला प्रशासन कार्यालय (DAO)</b> — प्रमुख: उपेन्द्रराज पौड्याल[citation:13]</li>
+      <li class="lang-en"><b>District Administration Office (DAO)</b> — Chief: Upendra Raj Paudyal[citation:13]</li>
+      <li class="lang-ne"><b>रुकुम जिल्ला अदालत</b> — जिल्ला न्यायधीश: विद्याराज पौडेल[citation:13]</li>
+      <li class="lang-en"><b>Rukum District Court</b> — District Judge: Vidyaraj Paudel[citation:13]</li>
+      <li class="lang-ne"><b>जिल्ला प्रहरी कार्यालय</b> — प्र.ना.उ. ठगबहादुर के.सी.[citation:13]</li>
+      <li class="lang-en"><b>District Police Office</b> — DSP Thagbahadur K.C.[citation:13]</li>
+      <li class="lang-ne"><b>नरसिं दल गण रुकुम (पश्चिम)</b> — गणपति दिनेश गौतम[citation:13]</li>
+      <li class="lang-en"><b>Narsingh Dal Battalion</b> — Commander Dinesh Gautam[citation:13]</li>
+      <li class="lang-ne"><b>पूर्वाधार विकास कार्यालय</b> — इ. रामचन्द्र बि.सी.[citation:5]</li>
+      <li class="lang-en"><b>Infrastructure Development Office</b> — Er. Ramchandra B.C.[citation:5]</li>
+    </ul>
+
+    <div class="note">
+      <b class="lang-ne">📞 सम्पर्क:</b>
+      <b class="lang-en">📞 Contact:</b>
+      <span class="lang-ne">DAO रुकुम पश्चिम: ०८८५३००४० | पूर्वाधार कार्यालय: ९८५७८४९९७७</span>
+      <span class="lang-en">DAO Rukum West: 088-530040 | Infrastructure Office: 9857849977</span>
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">आधिकारिक लिङ्कहरू</span><span class="lang-en">Official Links</span></div>
+      <a class="linkBtn gov" href="https://daorukumwest.moha.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">जिल्ला प्रशासन कार्यालय</span>
+        <span class="lang-en">District Administration Office</span>
+        <span class="lang-ne">आधिकारिक वेबसाइट</span>
+        <span class="lang-en">Official website</span>
+      </a>
+      <a class="linkBtn gov" href="http://idorukum.karnali.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">पूर्वाधार विकास कार्यालय</span>
+        <span class="lang-en">Infrastructure Development Office</span>
+        <span class="lang-ne">कर्णाली प्रदेश सरकार</span>
+        <span class="lang-en">Karnali Province Government</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card" id="ad3">
+    <h2><span class="lang-ne">३. सम्पर्क विवरण</span><span class="lang-en">3. Contact Details</span></h2>
+
+    <h3><span class="lang-ne">प्रमुख सम्पर्कहरू</span><span class="lang-en">Major Contacts</span></h3>
+    <div class="diagram">
+<span class="hl">कार्यालय</span>              <span class="hl">फोन</span>          <span class="hl">मोबाइल</span>
+<span class="arrow">──────────────────────────────────────────</span>
+DAO रुकुम पश्चिम     ०८८५३००४०    ९८५७८३७७७७
+जिल्ला अदालत         ०८८५३०१०६    ९८४१७०६१६०
+प्रहरी कार्यालय        ०८८५३०१८७    ९८५७८३५५५५
+पूर्वाधार विकास        ०८८६८०१५०    ९८५७८४९९७७
+    </div>
+
+    <div class="linksBlock">
+      <div class="lbl"><span class="lang-ne">थप जानकारी</span><span class="lang-en">More Info</span></div>
+      <a class="linkBtn gov" href="https://dccrukumwest.gov.np/" target="_blank" rel="noopener">
+        <span class="lang-ne">जिल्ला समन्वय समितिको वेबसाइट</span>
+        <span class="lang-en">District Coordination Committee Website</span>
+        <span class="lang-ne">सबै पालिकाको सम्पर्क</span>
+        <span class="lang-en">All municipality contacts</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">🏛️ रुकुम पश्चिमको प्रशासन 🏛️</div>
+</div>
+
+<!-- ===================== NEWS ===================== -->
+<div id="pageNews" class="page">
+  <div class="pageHeader">
+    <div class="sym">📰</div>
+    <h1><span class="lang-ne">समाचार र स्रोतहरू</span><span class="lang-en">News & Sources</span></h1>
+    <div class="en"><span class="lang-ne">रुकुम पश्चिमका ताजा समाचार र लिङ्कहरू</span><span class="lang-en">Latest news and links about Rukum West</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">ताजा समाचारहरू</span><span class="lang-en">Latest News</span></h2>
+
+    <div class="newsItem">
+      <div class="date">📅 अगस्ट २०२६</div>
+      <div class="head lang-ne">ठुली दह पर्यटकीय गन्तव्यको रूपमा उदाउँदै</div>
+      <div class="head lang-en">Thuli Dah emerging as a tourism destination</div>
+      <div class="lang-ne">मुसिकोट-७ स्थित ठुली दहमा पदमार्ग, पिकनिक स्थल र खानेपानीको व्यवस्था गरिएको।</div>
+      <div class="lang-en">Foot trail, picnic spots and water facilities added at Thuli Dah in Musikot-7.</div>
+      <a href="https://www.ecospherenews.com/detail/2428" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 मे २०२६</div>
+      <div class="head lang-ne">भूकम्पपीडित अझै अस्थायी टहरामा</div>
+      <div class="head lang-en">Earthquake survivors still in temporary shelters</div>
+      <div class="lang-ne">ढाई वर्षपछि पनि रुकुम पश्चिम र जाजरकोटका हजारौं परिवार पुनर्निर्माण अनुदानको प्रतीक्षामा।</div>
+      <div class="lang-en">Two and a half years on, thousands of families in Rukum West and Jajarkot still await reconstruction grants.</div>
+      <a href="https://kathmandupost.com/national/2026/05/11/earthquake-survivors-in-western-nepal-still-stuck-in-temporary-shelters-after-two-and-a-half-years" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 मार्च २०२६</div>
+      <div class="head lang-ne">UNDP र UN-Habitat ले सिँचाइ नहर पुनर्निर्माण गर्दै</div>
+      <div class="head lang-en">UNDP and UN-Habitat rebuilding irrigation canals</div>
+      <div class="lang-ne">रुकुम पश्चिमका २ पालिकामा ५७ घरधुरी लाभान्वित हुने।</div>
+      <div class="lang-en">57 households to benefit across 2 municipalities in Rukum West.</div>
+      <a href="https://www.undp.org/nepal/stories/improving-lives-and-livelihoods-areas-affected-jajarkot-earthquake" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 जनवरी २०२६</div>
+      <div class="head lang-ne">मुसिकोटमा फोहोर विरोध</div>
+      <div class="head lang-en">Garbage disposal protest in Musikot</div>
+      <div class="lang-ne">सतीपोलेमा फोहोर फाल्ने विरोधमा स्थानीयले बाटो अवरुद्ध।</div>
+      <div class="lang-en">Locals blocked road to Satipole dumping site.</div>
+      <a href="https://www.risingnepaldaily.com/news/73853" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 फेब्रुअरी २०२५</div>
+      <div class="head lang-ne">जलवायु परिवर्तनले किसानलाई पिरोल्दै</div>
+      <div class="head lang-en">Climate change biting farmers</div>
+      <div class="lang-ne">वर्षा अनियमित, बाली सुक्दै, उत्पादन आधा घट्यो।</div>
+      <div class="lang-en">Irregular rainfall, crops drying, production halved.</div>
+      <a href="https://kathmandupost.com/money/2025/02/24/farmers-in-rukum-west-suffer-as-climate-change-bites" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+
+    <div class="newsItem">
+      <div class="date">📅 अगस्ट २०२५</div>
+      <div class="head lang-ne">स्यार्पु तालमा पर्यटक बढ्दै</div>
+      <div class="head lang-en">Tourists rising at Syarpu Lake</div>
+      <div class="lang-ne">बिदाको दिन ~१०० पर्यटक, सामान्य दिन २०-३०।</div>
+      <div class="lang-en">~100 tourists on holidays, 20-30 on normal days.</div>
+      <a href="https://risingnepaldaily.com/news/67260" target="_blank" rel="noopener">→ <span class="lang-ne">पूरा पढ्नुहोस्</span><span class="lang-en">Read full</span></a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="lang-ne">समाचार स्रोतहरू (लिङ्कहरू)</span><span class="lang-en">News Sources (Links)</span></h2>
+
+    <h3><span class="lang-ne">राष्ट्रिय समाचार पत्रिकाहरू</span><span class="lang-en">National Newspapers</span></h3>
+    <a class="linkBtn news" href="https://kathmandupost.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">Kathmandu Post</span><span class="lang-en">Kathmandu Post</span>
+      <span class="lang-ne">अङ्ग्रेजी दैनिक</span><span class="lang-en">English daily</span>
+    </a>
+    <a class="linkBtn news" href="https://risingnepaldaily.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">The Rising Nepal</span><span class="lang-en">The Rising Nepal</span>
+      <span class="lang-ne">सरकारी अङ्ग्रेजी दैनिक</span><span class="lang-en">Government English daily</span>
+    </a>
+    <a class="linkBtn news" href="https://ekantipur.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">कान्तिपुर</span><span class="lang-en">Kantipur</span>
+      <span class="lang-ne">नेपाली दैनिक</span><span class="lang-en">Nepali daily</span>
+    </a>
+    <a class="linkBtn news" href="https://onlinekhabar.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">अनलाइन खबर</span><span class="lang-en">Onlinekhabar</span>
+      <span class="lang-ne">नेपाली अनलाइन</span><span class="lang-en">Nepali online</span>
+    </a>
+    <a class="linkBtn news" href="https://www.nepalnews.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">नेपाल न्यूज</span><span class="lang-en">Nepal News</span>
+    </a>
+
+    <h3><span class="lang-ne">कर्णाली प्रदेश समाचार</span><span class="lang-en">Karnali Province News</span></h3>
+    <a class="linkBtn news" href="https://www.ecospherenews.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">Ecosphere News</span><span class="lang-en">Ecosphere News</span>
+      <span class="lang-ne">वातावरण र विकास</span><span class="lang-en">Environment and development</span>
+    </a>
+    <a class="linkBtn news" href="https://karnalinews.com/" target="_blank" rel="noopener">
+      <span class="lang-ne">कर्णाली न्यूज</span><span class="lang-en">Karnali News</span>
+      <span class="lang-ne">प्रदेश समाचार</span><span class="lang-en">Province news</span>
+    </a>
+
+    <h3><span class="lang-ne">आधिकारिक स्रोतहरू</span><span class="lang-en">Official Sources</span></h3>
+    <a class="linkBtn gov" href="https://dccrukumwest.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">जिल्ला समन्वय समिति</span><span class="lang-en">District Coordination Committee</span>
+      <span class="lang-ne">आधिकारिक वेबसाइट</span><span class="lang-en">Official website</span>
+    </a>
+    <a class="linkBtn gov" href="https://daorukumwest.moha.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">जिल्ला प्रशासन कार्यालय</span><span class="lang-en">District Administration Office</span>
+      <span class="lang-ne">सूचना र समाचार</span><span class="lang-en">Notices and news</span>
+    </a>
+    <a class="linkBtn gov" href="https://censusnepal.cbs.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">राष्ट्रिय जनगणना</span><span class="lang-en">National Census</span>
+      <span class="lang-ne">तथ्याङ्क</span><span class="lang-en">Statistics</span>
+    </a>
+    <a class="linkBtn gov" href="https://karnali.gov.np/" target="_blank" rel="noopener">
+      <span class="lang-ne">कर्णाली प्रदेश सरकार</span><span class="lang-en">Karnali Province Government</span>
+      <span class="lang-ne">प्रदेश सूचना</span><span class="lang-en">Province info</span>
+    </a>
+
+    <h3><span class="lang-ne">YouTube भिडियोहरू</span><span class="lang-en">YouTube Videos</span></h3>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+news" target="_blank" rel="noopener">
+      <span class="lang-ne">रुकुम पश्चिम समाचार</span><span class="lang-en">Rukum West News</span>
+    </a>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+tourism" target="_blank" rel="noopener">
+      <span class="lang-ne">रुकुम पश्चिम पर्यटन</span><span class="lang-en">Rukum West Tourism</span>
+    </a>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+drone" target="_blank" rel="noopener">
+      <span class="lang-ne">रुकुम पश्चिम ड्रोन दृश्य</span><span class="lang-en">Rukum West Drone Views</span>
+    </a>
+    <a class="linkBtn yt" href="https://www.youtube.com/results?search_query=rukum+west+earthquake+reconstruction" target="_blank" rel="noopener">
+      <span class="lang-ne">भूकम्प पुनर्निर्माण</span><span class="lang-en">Earthquake Reconstruction</span>
+    </a>
+  </div>
+
+  <div class="footer">📰 रुकुम पश्चिमका समाचार 📰</div>
+</div>
+
+<div id="audioBtn">♪</div>
+
+<script>
+// Language toggle
+const langButtons = document.querySelectorAll('#langToggle button');
+langButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    document.body.dataset.lang = lang;
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.documentElement.lang = lang;
+  });
+});
+
+// Page nav
+const app = document.getElementById('app');
+const backBtn = document.getElementById('backBtn');
+const pages = {
+  overview: document.getElementById('pageOverview'),
+  economy: document.getElementById('pageEconomy'),
+  tourism: document.getElementById('pageTourism'),
+  admin: document.getElementById('pageAdmin'),
+  news: document.getElementById('pageNews')
+};
+
+function showPage(name){
+  app.style.display = 'none';
+  Object.values(pages).forEach(p => p.classList.remove('show'));
+  backBtn.style.display = 'block';
+  if (pages[name]) pages[name].classList.add('show');
+  window.scrollTo(0,0);
+}
+function showHome(){
+  app.style.display = 'flex';
+  Object.values(pages).forEach(p => p.classList.remove('show'));
+  backBtn.style.display = 'none';
+  window.scrollTo(0,0);
+}
+
+document.getElementById('btnOverview').onclick = () => showPage('overview');
+document.getElementById('btnEconomy').onclick = () => showPage('economy');
+document.getElementById('btnTourism').onclick = () => showPage('tourism');
+document.getElementById('btnAdmin').onclick = () => showPage('admin');
+document.getElementById('btnNews').onclick = () => showPage('news');
+backBtn.onclick = showHome;
+
+// TOC smooth scroll
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') showHome();
+});
+
+console.log('%c🏔️ रुकुम पश्चिम · RUKUM WEST 🏔️','color:#a8e8b8;font-size:20px;font-family:Georgia;');
+</script>
+</body>
+</html>
